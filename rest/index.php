@@ -56,6 +56,5 @@ Flight::route('DELETE /users/@id', function($id){
 //     echo "Hello $name";
 // });
 
-
 Flight::start();
 ?>

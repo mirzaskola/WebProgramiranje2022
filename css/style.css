@@ -60,22 +60,22 @@ header nav .navbar-brand img {
  header nav ul.navbar-nav li.nav-item a.nav-link {
     font-weight: 500;
     font-size: 16px;
-    line-height: 22px;
+    line-height: 30px;
     color: #FFFFFF;
     padding: 0 24px;
 }
-header nav ul.navbar-nav li.nav-item a.nav-link.call-now-button {
+header nav ul.navbar-nav li.nav-item a.nav-link.sign-in-button {
     border-radius: 5px;
     padding: 10px 20px;
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
     color: #FFFFFF;
-    margin-left: 15px;
+    margin-left: 0px;
     background: transparent;
     border: 1px solid #fff;
 }
-header nav ul.navbar-nav li.nav-item a.nav-link.call-now-button:hover {
+header nav ul.navbar-nav li.nav-item a.nav-link.sign-in-button:hover {
     background: #fff;
     color: #000;
     transition: all ease .6s;
@@ -257,7 +257,7 @@ header nav ul.navbar-nav li.nav-item a.nav-link.call-now-button:hover {
    width: 60%;
 }
 .most-popular .box .item-line.Lw-70::before{
-   width:70%;
+   width: 70%;
 }
 .most-popular .box .item-line.Lw-80::before{
    width: 80%;
