@@ -1,4 +1,5 @@
 var UserService = {
+    // "Konstruktor" stranice
     init: function(){
       $("#addUserForm").validate({
         submitHandler: function(form){
@@ -88,6 +89,7 @@ var UserService = {
                           <!-- single item end -->
                           `;    
           }
+          // .html funkcija je za injectanje htmla u odredjeni dio stranice   
           $("#game-list").html(html);
           console.log(data);
           // alert("Ucitano!");
@@ -109,6 +111,7 @@ var UserService = {
     },
 
     add: function(podaci){
+        // ajax POST request za usere
       $.ajax({
           url: 'rest/users',
           type: 'POST',
@@ -147,6 +150,7 @@ var UserService = {
     },
 
     delete: function(id){
+    // ajax DELETE request za usere
       $(".view-button").attr('disabled', true);
       id = $("#id").val();
       $.ajax({
