@@ -1,60 +1,25 @@
 <?php
-
-require_once '../vendor/autoload.php';
-require_once 'dao/UserDao.class.php';
-
-Flight::register('dao', 'UserDao');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 
-// get all
-Flight::route('GET /users', function(){
-    $users = Flight::dao()->get_all();
-    Flight::json($users);
-    // print_r($users);
-});
-
-//get one
-Flight::route('GET /users/@id', function($id){
-    $users = Flight::dao()->get_by_id($id);
-    Flight::json($users);
-});
-
-// update
-Flight::route('PUT /users/@id', function($id){
-    $request = Flight::request();
-    $data = $request->data->getData();
-    // Flight::dao()->update($id, $data['user_name'], $data['user_mail'], $data['user_password']);
-    $data['id'] = $id;
-    Flight::dao()->update($data);
-    Flight::json($data);
-
-});
-
-// insert
-Flight::route('POST /users', function(){
-    $request = Flight::request();
-    $data = $request->data->getData();
-    // Flight::dao()->add($data['user_name'], $data['user_mail'], $data['user_password']);
-    $podaci = Flight::dao()->add($data);
-    Flight::json($podaci);
-
-});
+require_once __DIR__.'/../vendor/autoload.php';
 
 
-// delete
-Flight::route('DELETE /users/@id', function($id){
-    Flight::dao()->delete($id);
-});
+require_once __DIR__.'/services/UserService.class.php';
+require_once __DIR__.'/services/GameService.class.php';
 
-// Flight::route('/', function(){
-//     echo "Hello world";
-// });
-// Flight::route('/dorian', function(){
-//     echo "Hello dugin";
-// });
-// Flight::route('/tin/@name', function($name){
-//     echo "Hello $name";
-// });
+
+Flight::register('userService', 'UserService');
+Flight::register('gameService', 'GameService');
+
+
+require_once __DIR__.'/routes/UserRoutes.php';
+require_once __DIR__.'/routes/GameRoutes.php';
 
 Flight::start();
+
+
+
 ?>

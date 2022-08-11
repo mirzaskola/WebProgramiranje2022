@@ -61,17 +61,17 @@ class BaseDao{
         $query = substr($query, 0, -2);
         $query .= " WHERE ${id_column} = :id";
     
-        $stmt= $this->connection->prepare($query);
+        $stmt= $this->conn->prepare($query);
         $entity['id'] = $id;
         $stmt->execute($entity);
     }
-    // Returna vise rezultata
+    // Returns multiple records
     protected function query($query, $params){
         $stmt = $this->conn->prepare($query);
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    // Returna 1 record
+    // Returns 1 record
     protected function query_unique($query, $params){
         $results = $this->query($query, $params);
         return reset($results);

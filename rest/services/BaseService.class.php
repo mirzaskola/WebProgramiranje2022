@@ -2,12 +2,11 @@
 
 abstract class BaseService{
 
-    private $dao;
+    public $dao;
 
     public function __construct($dao){
         $this->dao = $dao;
     }
-
     public function get_all(){
         return $this->dao->get_all();
     }
@@ -21,7 +20,7 @@ abstract class BaseService{
         return $this->dao->update($id, $entity);
     }
     public function delete($id){
-        return $this->dao->delete($entity);
+        return $this->dao->delete($id);
     }
 }
 
