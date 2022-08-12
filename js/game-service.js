@@ -1,23 +1,23 @@
-var UserService = {
+var GameService = {
     // "Konstruktor" stranice
     init: function(){
-      $("#addUserForm").validate({
+      $("#addGameForm").validate({
         submitHandler: function(form){
           var podaci = Object.fromEntries((new FormData(form)).entries());
-          UserService.add(podaci);
+          GameService.add(podaci);
         }  
       });
-      UserService.get_all();
+      GameService.get_all();
     },
     // Kod Kece je list
     get_all: function(){
-      $.get("rest/users", function(data){
+      $.get("rest/games", function(data){
           var html = "";
           for(let i = 0; i < data.length; i++){
               html += `<!-- single item start -->
                           <div class="col-lg-4 mt-4">
                               <div class="box text-start shadow">
-                                  <h4 class="text-center">`+ data[i].user_name +`</h4>
+                                  <h4 class="text-center">`+ data[i].name +`</h4>
                                   <div class="img-box">
                                       <img src="img/video-6.jpg" alt="img" class="img-fluid">
                                       <div class="start">
@@ -79,7 +79,7 @@ var UserService = {
                                   </div>
                                   <br>
                                       <!-- Button trigger modal -->
-                                      <button type="button" class="btn btn-primary view-button" onclick=UserService.get(`+data[i].id+`)>
+                                      <button type="button" class="btn btn-primary view-button" onclick=GameService.get(`+data[i].id+`)>
                                       View details
                                       </button>
                                       
@@ -99,13 +99,14 @@ var UserService = {
     get: function(id){
       $(".view-button").attr('disabled', true);
       // ajax GET request za usere
-      $.get('rest/users/'+id, function(data){
+      $.get('rest/games/'+id, function(data){
           // jquery selektori
           $("#id").val(data.id);
-          $("#username").val(data.user_name);
-          $("#email").val(data.user_mail);
-          $("#password").val(data.user_password);
-          $("#ModalEditUser").modal("show");
+          $("#name").val(data.name);
+          $("#category_id").val(data.category_id);
+          $("#description").val(data.description);
+        //   $("#password").val(data.user_password);
+          $("#ModalEditGame").modal("show");
           $(".view-button").attr('disabled', false);
       });
     },
@@ -113,7 +114,7 @@ var UserService = {
     add: function(podaci){
         // ajax POST request za usere
       $.ajax({
-          url: 'rest/users',
+          url: 'rest/games',
           type: 'POST',
           data: JSON.stringify(podaci),
           dataType: 'json',
@@ -122,7 +123,7 @@ var UserService = {
               $("#ModalAddUser").modal("hide");
               $(".save-changes-button").attr('disabled', false);
               $("#game-list").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
-              UserService.get_all();
+              GameService.get_all();
               }
       });
     },
@@ -130,21 +131,21 @@ var UserService = {
     update: function(){
       $(".save-changes-button").attr('disabled', true);
       var podaci = {};
-      podaci.user_name = $("#username").val();    
-      podaci.user_mail = $("#email").val();    
-      podaci.user_password = $("#password").val(); 
+      podaci.name = $("#name").val();    
+      podaci.category_id = $("#category_id").val();    
+      podaci.description = $("#description").val(); 
       // ajax PUT request za usere   
       $.ajax({
-          url: 'rest/users/'+$("#id").val(),
+          url: 'rest/games/'+$("#id").val(),
           type: 'PUT',
           data: JSON.stringify(podaci),
           dataType: 'json',
           contentType: 'application/json',
           success: function (result) {
-              $("#ModalEditUser").modal("hide");
+              $("#ModalEditGame").modal("hide");
               $(".save-changes-button").attr('disabled', false);
               $("#game-list").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
-              UserService.get_all();
+              GameService.get_all();
               }
       });
     },
@@ -154,15 +155,15 @@ var UserService = {
       $(".view-button").attr('disabled', true);
       id = $("#id").val();
       $.ajax({
-          url: 'rest/users/'+id,
+          url: 'rest/games/'+id,
           type: 'DELETE',
           // data: JSON.stringify(podaci),
           // dataType: 'json',
           // contentType: 'application/json',
           success: function (result) {
               $("#game-list").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
-              $("#ModalEditUser").modal("hide");
-              UserService.get_all();
+              $("#ModalEditGame").modal("hide");
+              GameService.get_all();
               }
       });
     }

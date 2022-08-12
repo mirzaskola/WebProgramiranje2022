@@ -89,7 +89,7 @@
                     <div class="most-body text-center">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAddUser">
-                            Add user
+                            Add game
                         </button>
                         <!-- row start -->
                         <div id="game-list" class="row">
@@ -112,7 +112,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.validate.min.js"></script>
-    <script src="js/user-service.js"></script>
+    <script src="js/game-service.js"></script>
 
     
     
@@ -135,23 +135,24 @@
         </div>
       </div>
     <!--EDIT USER MODAL-->    
-    <div class="modal fade text-dark" id="ModalEditUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade text-dark" id="ModalEditGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <p class="modal-title" id="exampleModalLabel">Info about user</p>
+              <p class="modal-title" id="exampleModalLabel">Info about game</p>
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <input id="id" type="hidden" placeholder="ID">
-              <input id="username" type="text" placeholder="username">
-              <input id="email" type="text" placeholder="email">
-              <input id="password" type="text" placeholder="password">
+              <input id="name" type="text" placeholder="name">
+              <input id="category_id" type="text" placeholder="category ID">
+              <input id="description" type="text" placeholder="description">
+              <!-- <input id="password" type="text" placeholder="password"> -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary save-changes-button" onclick="UserService.update()">Save</button>
-                <button type="button" class="btn btn-danger save-changes-button" onclick="UserService.delete(id)">Delete</button>
+                <button type="button" class="btn btn-primary save-changes-button" onclick="GameService.update()">Save</button>
+                <button type="button" class="btn btn-danger save-changes-button" onclick="GameService.delete(id)">Delete</button>
               </div>
           </div>
         </div>
@@ -160,9 +161,9 @@
     <div class="modal fade text-dark" id="ModalAddUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form id="addUserForm">
+            <form id="addGameForm">
               <div class="modal-header">
-                <p class="modal-title" id="exampleModalLabel">Add user info pls</p>
+                <p class="modal-title" id="exampleModalLabel">Add game info pls</p>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -172,17 +173,17 @@
               <input id="addpassword" type="text" placeholder="password"> -->
               
               <div class="form-group">
-                <label>Username</label>
-                <input name="user_name" type="text" class="form-control required" id="username1" placeholder="Enter username">
+                <label>Game name</label>
+                <input name="name" type="text" class="form-control required" id="username1" placeholder="Enter game name">
               </div>
               <div class="form-group">
-                <label>Email address</label>
-                <input name="user_mail" type="email" class="form-control required" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <label>Category</label>
+                <input name="category_id" type="text" class="form-control required" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter category ID">
                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
               </div>
               <div class="form-group">
-                <label>Password</label>
-                <input name="user_password" type="password" class="form-control required" id="exampleInputPassword1" placeholder="Password">
+                <label>Description</label>
+                <input name="description" type="text" class="form-control required" id="exampleInputPassword1" placeholder="Enter description">
               </div>
             
               </div>
@@ -198,7 +199,7 @@
   <!-- Skripta za pokretanje stranice i ucitavanje validacije -->
   <script>
     
-    UserService.init();
+    GameService.init();
 
   </script>
 </html>

@@ -13,6 +13,9 @@ require_once __DIR__.'/services/GameService.class.php';
 
 Flight::register('userService', 'UserService');
 Flight::register('gameService', 'GameService');
+Flight::register('ratingService', 'RatingService');
+Flight::register('categoryService', 'CategoryService');
+Flight::register('commentService', 'CommentService');
 
 
 require_once __DIR__.'/routes/UserRoutes.php';
