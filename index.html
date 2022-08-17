@@ -24,7 +24,7 @@
     </head>
     <body>
         <!-- header start -->
-        <header class="fixed-top">
+        <header>
           <!--ODAVDE-->
           <!-- Moze i container -->
           <div class="container-fluid">
@@ -88,8 +88,11 @@
                     </div>
                     <div class="most-body text-center">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAddUser">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAddGame">
                             Add game
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="GameService.get_all()">
+                            List games
                         </button>
                         <!-- row start -->
                         <div id="game-list" class="row">
@@ -105,7 +108,127 @@
                     <!-- most body end -->
                 </div>
             </div>
-            <!-- most popular end -->  
+            <!-- most popular end --> 
+            <!-- hot this start -->
+            <div class="hot-this" id="s3">
+              <div class="container">
+                  <div class="common-text text-center">
+                      <h2>Special Offers From Our Partners</h2>
+                  </div>
+                  <div class="row">
+                      <!-- single item start -->
+                      <div class="col-lg-4">
+                          <div class="item">
+                              <h4>Fifa 2022</h4>
+                              <p>For our members only $16.99</p>
+                              <a href="">Buy on Amazon.com</a>
+                          </div>
+                      </div>
+                      <!-- single item end -->
+                      <!-- single item start -->
+                      <div class="col-lg-4 mt-lg-0 mt-4">
+                          <div class="item">
+                              <h4>Grand Theft Auto 5</h4>
+                              <p>For our members only $12</p>
+                              <a href="">Buy on G2A.com</a>
+                          </div>
+                      </div>
+                      <!-- single item end -->
+                      <!-- single item start -->
+                      <div class="col-lg-4  mt-lg-0 mt-4">
+                          <div class="item">
+                              <h4>The Legend of Zelda</h4>
+                              <p>For our members only $19.99</p>
+                              <a href="">Buy on CloudGamers.com</a>
+                          </div>
+                      </div>
+                      <!-- single item end -->
+                  </div>
+              </div>
+          </div>
+          <!-- hot this end -->
+          <div class="contact" id="s5">
+            <div class="container">
+
+              <div class="common-text text-center">
+                  <h2>Other Information</h2>
+              </div>
+
+                <div class="row">
+
+                  <!-- single item start -->
+                  <div class="col-lg-3">
+                      <div class="item-left">
+                          <a href=""><img src="img/logo.png" alt="img" class="img-fluid"> </a>
+                      </div>
+                  </div>
+                  <!-- single item end -->
+
+
+
+
+                    <!-- single item start -->
+                    <div class="col-lg-9">
+                        <div class="item-right">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Contact Info</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Privacy Policy</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Terms and Conditions</button>
+                                </li>
+                                <!--<li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Disclaimer</button>
+                                </li>-->
+
+
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                    <div class="contact-body">
+                                        <div class="row">
+                                            <div class="col-lg-5">
+                                                <div class="item-left-text">
+                                                    <h4>Gamers Paradise</h4>
+                                                    <p>Email: <a href="mailto: info@gamersparadise.com">info@gamersparadise.com</a></p>
+                                                    <p>Phone: <a href="tel: +38761225883">+38761225883</a></p>
+                                                    <p>Address: Francuske revolucije bb<br>
+                                                    71000 Sarajevo</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-7"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                  At Gamers Paradise, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Gamers Paradise and how we use it.
+                                  If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.
+                                  This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in Gamers Paradise. This policy is not applicable to any information collected offline or via channels other than this website.
+                                </div>
+                                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                                  Welcome to Gamers Paradise!
+                                  These terms and conditions outline the rules and regulations for the use of Gamers Paradise's Website.
+                                  By accessing this website we assume you accept these terms and conditions. Do not continue to use Gamers Paradise if you do not agree to take all of the terms and conditions stated on this page. Gamers Paradise reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- single item end -->
+
+                </div>
+            </div>
+        </div>
+        <!-- footer start -->
+        <footer>
+            <div class="container text-center">
+                <p class="mb-0">Gamers Paradise © 2022. All rights reserved</p>
+            </div>
+        </footer>
+        <!-- footer end -->
         </main>
     </body> 
     <!--SKRIPTE-->
@@ -158,7 +281,7 @@
         </div>
       </div>
     <!--ADD USER MODAL-->  
-    <div class="modal fade text-dark" id="ModalAddUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade text-dark" id="ModalAddGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <form id="addGameForm">

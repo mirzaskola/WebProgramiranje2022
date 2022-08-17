@@ -39,4 +39,12 @@ Flight::route('DELETE /games/@id', function($id){
     Flight::gameService()->delete($id);
 });
 
+// get highest rated
+Flight::route('GET /toprated', function(){
+    $data = Flight::gameService()->get_highest_rated_games();
+    print_r($data);
+    Flight::json($data);
+    // print_r($users);
+});
+
 ?>

@@ -71,6 +71,12 @@ class BaseDao{
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    // Returns multiple records, takes no parameters
+    protected function query_no_param($query){
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     // Returns 1 record
     protected function query_unique($query, $params){
         $results = $this->query($query, $params);

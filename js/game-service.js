@@ -3,11 +3,11 @@ var GameService = {
     init: function(){
       $("#addGameForm").validate({
         submitHandler: function(form){
-          var podaci = Object.fromEntries((new FormData(form)).entries());
-          GameService.add(podaci);
+          var entity = Object.fromEntries((new FormData(form)).entries());
+          GameService.add(entity);
         }  
       });
-      GameService.get_all();
+      GameService.get_highest_rated();
     },
     // Kod Kece je list
     get_all: function(){
@@ -23,7 +23,7 @@ var GameService = {
                                       <div class="start">
                                           <div class="star_inner">
                                               <img src="img/star.png" alt="img" class="img-fluid">
-                                              <span class="d-inline-block">82%</span>
+                                              <span class="d-inline-block">`+ parseInt(data[i].total_rating) +`</span>
                                           </div>
                                       </div>
                                   </div>
@@ -120,10 +120,10 @@ var GameService = {
           dataType: 'json',
           contentType: 'application/json',
           success: function (result) {
-              $("#ModalAddUser").modal("hide");
+              $("#ModalAddGame").modal("hide");
               $(".save-changes-button").attr('disabled', false);
               $("#game-list").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
-              GameService.get_all();
+              GameService.get_highest_rated();
               }
       });
     },
@@ -145,7 +145,7 @@ var GameService = {
               $("#ModalEditGame").modal("hide");
               $(".save-changes-button").attr('disabled', false);
               $("#game-list").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
-              GameService.get_all();
+              GameService.get_highest_rated();
               }
       });
     },
@@ -163,9 +163,94 @@ var GameService = {
           success: function (result) {
               $("#game-list").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
               $("#ModalEditGame").modal("hide");
-              GameService.get_all();
+              GameService.get_highest_rated();
               }
       });
+    },
+    get_highest_rated: function(){
+        $.get("rest/toprated", function(data){
+            var html = "";
+            for(let i = 0; i < data.length; i++){
+                html += `<!-- single item start -->
+                            <div class="col-lg-4 mt-4">
+                                <div class="box text-start shadow">
+                                    <h4 class="text-center">`+ data[i].name +`</h4>
+                                    <div class="img-box">
+                                        <img src="img/video-6.jpg" alt="img" class="img-fluid">
+                                        <div class="start">
+                                            <div class="star_inner">
+                                                <img src="img/star.png" alt="img" class="img-fluid">
+                                                <span class="d-inline-block">`+ parseInt(data[i].total_rating) +`%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-lg-3">
+                                            <div class="item-text">
+                                                <p class="mb-0">Gameplay</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9" >
+                                            <div class="item-line Lw-90"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="item-text">
+                                                <p class="mb-0">Performance</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="item-line Lw-80"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="item-text">
+                                                <p class="mb-0">Graphics</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="item-line Lw-60"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="item-text">
+                                                <p class="mb-0">Audio</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="item-line Lw-100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="item-text">
+                                                <p class="mb-0">Satisfaction</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="item-line Lw-90"></div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary view-button" onclick=GameService.get(`+data[i].id+`)>
+                                        View details
+                                        </button>
+                                        
+                                    
+                                </div>
+                            </div>
+                            <!-- single item end -->
+                            `;    
+            }
+            // .html funkcija je za injectanje htmla u odredjeni dio stranice   
+            $("#game-list").html(html);
+            console.log(data);
+            // alert("Ucitano!");
+        });    
     }
   }
 
