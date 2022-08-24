@@ -227,7 +227,7 @@ header nav ul.navbar-nav li.nav-item a.nav-link.sign-in-button:hover {
 }
 .most-popular .box .img-box .start span {
     color: #000;
-    font-size: 18px;
+    font-size: 16px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -250,24 +250,7 @@ header nav ul.navbar-nav li.nav-item a.nav-link.sign-in-button:hover {
     font-size: 15px;
     margin-bottom: 5px !important;
 }
-.most-popular .box .item-line.Lw-50::before{
-   width: 50%;
-}
-.most-popular .box .item-line.Lw-60::before{
-   width: 60%;
-}
-.most-popular .box .item-line.Lw-70::before{
-   width: 70%;
-}
-.most-popular .box .item-line.Lw-80::before{
-   width: 80%;
-}
-.most-popular .box .item-line.Lw-90::before{
-   width: 90%;
-}
-.most-popular .box .item-line.Lw-100::before{
-   width: 100%;
-}
+
 .most-popular .slider-item{
     margin: 0 15px;
 }
@@ -422,16 +405,6 @@ footer{
     bottom: -40px;
 }
 /* contact end */
-
-.modal-dialog{
-	  width: 300px;
-		color: white;
-    border-radius: 10px;
-}
-.modal-content {
-    background: rgb(50 50 50);
-}
-
 .form-range::-webkit-slider-thumb {
   background: grey;
 }

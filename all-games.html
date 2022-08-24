@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="description" content="Web Design">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="author" content="Mirza Kurtovic">
+        <meta name="viewport" content="width=device-width, initial-scale=1,  maximum-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="content-script-type" content="text/javascript">
+        <meta http-equiv="x-dns-prefetch-control" content="on">
+        <!-- Bootstrap css -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom css -->
+        <link rel="stylesheet" href="css/style.css">
+        <title>Gamers Paradise | The most trusted review site</title>
+
+        <style>
+            #backToTopBtn {
+                display: none; /* Hidden by default */
+                position: fixed; /* Fixed/sticky position */
+                bottom: 20px; /* Place the button at the bottom of the page */
+                right: 30px; /* Place the button 30px from the right */
+                z-index: 99; /* Make sure it does not overlap */
+                border: none; /* Remove borders */
+                outline: none; /* Remove outline */
+                background-color: #555; /* Set a background color */
+                color: #fff; /* Text color */
+                cursor: pointer; /* Add a mouse pointer on hover */
+                padding: 15px; /* Some padding */
+                border-radius: 180px; /* Rounded corners */
+                font-size: 8px; /* Increase font size */
+                text-transform: uppercase;
+                transition: all 0.2s ease-in-out;
+            }
+
+            #backToTopBtn:hover {   
+                color: #666;
+                box-shadow: 0 5px 15px #666;
+            }
+            .dropdown-toggle::after {
+            content: none;
+        }
+        </style>
+        
+    </head>
+
+    <body>
+        <div id="header"></div>
+
+        <main>
+             <!--Top rated start -->
+            <div class="most-popular" id="s2">
+                <div class="container-fluid align-items-center">
+                    <div class="common-text text-center container-sm">
+                        <h2>All games</h2> 
+                        <div class="d-lg-inline-flex p-2 w-md-50 input-group">                        
+                            <input type="text" class="form-control text-truncate me-1" placeholder="Type name of the game you want to look up..." aria-label="Search" aria-describedby="addon-wrapping">
+                            <button class="btn btn-outline-light w-md-50" type="button" id="button-addon2">Search</button>
+                        </div>                                                                
+                    </div>
+                    <br><br>            
+                    <div class="most-body text-center">                        
+                        <!-- row start -->
+                        <div id="game-list" class="row justify-content-center">
+                           
+                            <!-- single item start -->
+                            <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
+                                <div class="box text-start shadow">
+                                    <h4 class="text-center">Half-Life: Alyx</h4>
+                                    <div class="text-center">
+                                        <img src="img/video-6.jpg" alt="img" class="img-fluid rounded"> 
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">                                        
+                                        <div class="col-md">
+                                            <div class="text-center">
+                                                <p class="text-sm-center">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- Button trigger modal -->
+                                            <button type="submit" class="btn btn-primary">
+                                                View details
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- single item end -->
+                            
+                            <!-- single item start -->
+                            <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
+                                <div class="box text-start shadow">
+                                    <h4 class="text-center">Half-Life: Alyx</h4>
+                                    <div class="text-center">
+                                        <img src="img/video-6.jpg" alt="img" class="img-fluid rounded"> 
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">                                        
+                                        <div class="col-md">
+                                            <div class="text-center">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary">
+                                            View details
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- single item end -->
+
+                            <!-- single item start -->
+                            <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
+                                <div class="box text-start shadow">
+                                    <h4 class="text-center">Half-Life: Alyx</h4>
+                                    <div class="text-center">
+                                        <img src="img/video-6.jpg" alt="img" class="img-fluid rounded"> 
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">                                        
+                                        <div class="col-md">
+                                            <div class="text-center">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary">
+                                            View details
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- single item end -->
+                            
+                            <!-- single item start -->
+                            <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
+                                <div class="box text-start shadow">
+                                    <h4 class="text-center">Half-Life: Alyx</h4>
+                                    <div class="text-center">
+                                        <img src="img/video-6.jpg" alt="img" class="img-fluid rounded"> 
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">                                        
+                                        <div class="col-md">
+                                            <div class="text-center">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary">
+                                            View details
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- single item end -->
+
+                            <!-- single item start -->
+                            <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
+                                <div class="box text-start shadow">
+                                    <h4 class="text-center">Half-Life: Alyx</h4>
+                                    <div class="text-center">
+                                        <img src="img/video-6.jpg" alt="img" class="img-fluid rounded"> 
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">                                        
+                                        <div class="col-md">
+                                            <div class="text-center">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary">
+                                            View details
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- single item end -->
+                            
+                            <!-- single item start -->
+                            <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
+                                <div class="box text-start shadow">
+                                    <h4 class="text-center">Half-Life: Alyx</h4>
+                                    <div class="text-center">
+                                        <img src="img/video-6.jpg" alt="img" class="img-fluid rounded"> 
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">                                        
+                                        <div class="col-md">
+                                            <div class="text-center">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary">
+                                            View details
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- single item end -->
+
+                            <!-- single item start -->
+                            <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
+                                <div class="box text-start shadow">
+                                    <h4 class="text-center">Half-Life: Alyx</h4>
+                                    <div class="text-center">
+                                        <img src="img/video-6.jpg" alt="img" class="img-fluid rounded"> 
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">                                        
+                                        <div class="col-md">
+                                            <div class="text-center">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary">
+                                            View details
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- single item end -->
+                            
+                            <!-- single item start -->
+                            <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
+                                <div class="box text-start shadow">
+                                    <h4 class="text-center">Half-Life: Alyx</h4>
+                                    <div class="text-center">
+                                        <img src="img/video-6.jpg" alt="img" class="img-fluid rounded"> 
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">                                        
+                                        <div class="col-md">
+                                            <div class="text-center">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary">
+                                            View details
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- single item end -->                            
+                        </div>
+                        <!-- row end -->
+                    </div>
+                    <!-- most body end -->                    
+                </div>
+            </div>
+            <!-- Top rated end -->
+            
+            <div id="offers"></div>
+        </main>
+        
+
+        <!-- Back to top button start -->
+        <button class="btn btn-outline-light" onclick="topFunction()" id="backToTopBtn" title="Go to top">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#fff" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+              </svg>
+        </button> 
+        <!-- Back to top button end -->        
+        <div id="footer"></div>
+    </body> 
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/game-service.js"></script>
+
+    <script>
+        mybutton = document.getElementById("backToTopBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        } 
+    </script>
+    <script> 
+        $(function(){
+          $("#header").load("pages/header.html");
+          $("#offers").load("pages/offers.html");
+          $("#about").load("pages/about-us.html");
+          $("#footer").load("pages/footer.html"); 
+        });
+    </script> 
+</html>
+
+
+
+    <!--MODALS prvi je example modal
+    <div class="modal fade" id="exampleModalUniversal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    EDIT USER MODAL   
+    <div class="modal fade text-dark" id="ModalEditGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <p class="modal-title" id="exampleModalLabel">Info about game</p>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input id="id" type="hidden" placeholder="ID">
+              <input id="name" type="text" placeholder="name">
+              <input id="category_id" type="text" placeholder="category ID">
+              <input id="description" type="text" placeholder="description">
+              <input id="password" type="text" placeholder="password"> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary save-changes-button" onclick="GameService.update()">Save</button>
+                <button type="button" class="btn btn-danger save-changes-button" onclick="GameService.delete(id)">Delete</button>
+              </div>
+          </div>
+        </div>
+    </div>
+
+    ADD USER MODAL  
+    <div class="modal fade text-dark" id="ModalAddGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form id="addGameForm">
+              <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel">Add game info pls</p>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+              <input id="addid" type="hidden" placeholder="ID">
+              <input id="addusername" type="text" placeholder="username">
+              <input id="addemail" type="text" placeholder="email">
+              <input id="addpassword" type="text" placeholder="password">
+              
+              <div class="form-group">
+                <label>Game name</label>
+                <input name="name" type="text" class="form-control required" id="username1" placeholder="Enter game name">
+              </div>
+              <div class="form-group">
+                <label>Category</label>
+                <input name="category_id" type="text" class="form-control required" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter category ID">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <input name="description" type="text" class="form-control required" id="exampleInputPassword1" placeholder="Enter description">
+              </div>
+            
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary save-changes-button" onclick="addNewItem()">Add user</button>
+                <button type="submit" class="btn btn-primary save-changes-button">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>-->
+
+

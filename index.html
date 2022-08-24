@@ -17,90 +17,48 @@
         <title>Gamers Paradise | The most trusted review site</title>
 
         <style>
-          .error{
-            color: red;
-          }
-        </style>
-    </head>
-    <body>
-        <!-- header start -->
-        <header>
-          <!--ODAVDE-->
-          <!-- Moze i container -->
-          <div class="container-fluid">
-              <nav class="navbar navbar-expand-lg p-0">
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class=""><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                  </svg></span>
-                  <!-- Pocetak dugmadi, klasa justify-content-center za centriranje -->
-                  </button>
-                  <a class="navbar-brand" href="#">
-                    <img src="favicon.ico" alt="Blog logo" class="d-inline-block align-text-top">
-                  </a>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              <img src="img/user.png" height="25px" width="25px">
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <li><a class="dropdown-item" href="#">Sign In</a></li>
-                              <li><a class="dropdown-item" href="#">Sign Up</a></li>
-                              <li><hr class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" href="#">Moze'l 30% za prolaz? :)</a></li>
-                            </ul>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" aria-current="page" href="#s1">About us</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#s2">Higest Rated</a>
-                          </li>
+            #backToTopBtn {
+                display: none; /* Hidden by default */
+                position: fixed; /* Fixed/sticky position */
+                bottom: 20px; /* Place the button at the bottom of the page */
+                right: 30px; /* Place the button 30px from the right */
+                z-index: 99; /* Make sure it does not overlap */
+                border: none; /* Remove borders */
+                outline: none; /* Remove outline */
+                background-color: #555; /* Set a background color */
+                color: #fff; /* Text color */
+                cursor: pointer; /* Add a mouse pointer on hover */
+                padding: 15px; /* Some padding */
+                border-radius: 180px; /* Rounded corners */
+                font-size: 8px; /* Increase font size */
+                text-transform: uppercase;
+                transition: all 0.2s ease-in-out;
+            }
 
-                          <li class="nav-item">
-                              <a class="nav-link" href="#s3">Special Offers</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#s5">Contact</a>
-                          </li>
-                      </ul>
-                      <form class="d-flex justify-content-center">
-                        <input class="form-control me-2" type="search" placeholder="Search games" aria-label="Search" style="width: 50%;">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                      </form>
-    
-                  </div>
-              </nav>
-          </div>
-          <!--DOVDE-->
-        </header>
-        <!-- header end -->
+            #backToTopBtn:hover {   
+                color: #666;
+                box-shadow: 0 5px 15px #666;
+            }
+            .dropdown-toggle::after {
+            content: none;
+        }
+        </style>
         
-        <!--end of header-->
+    </head>
+
+    <body>  
+        <div id="header"></div>
         <main>
-            <!-- most popular start -->
+            <!--Top rated start -->
             <div class="most-popular" id="s2">
                 <div class="container-fluid">
                     <div class="common-text text-center">
                         <h2>Highest Rated Games</h2>
-                        <!-- <img src="img/landing-rev-slider-img-13.png" alt="img" class="img-fluid"> -->
                     </div>
-                    <div class="most-body text-center">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAddGame">
-                            Add game
-                        </button>
-                        <button type="button" class="btn btn-primary" onclick="GameService.get_all()">
-                            List games
-                        </button>
+                    
+                    <div class="most-body text-center">                        
                         <!-- row start -->
-                        <div id="game-list" class="row">
-                            <!-- single item start -->
-                            <div class="spinner-border" role="status">
-                                <span class="sr-only"></span>
-                            </div>
-                            <!-- single item end -->
+                        <div id="top-rated" class="row">
                             
                         </div>
                         <!-- row end -->
@@ -108,221 +66,141 @@
                     <!-- most body end -->
                 </div>
             </div>
-            <!-- most popular end --> 
-            <!-- hot this start -->
-            <div class="hot-this" id="s3">
-              <div class="container">
-                  <div class="common-text text-center">
-                      <h2>Special Offers From Our Partners</h2>
-                  </div>
-                  <div class="row">
-                      <!-- single item start -->
-                      <div class="col-lg-4">
-                          <div class="item">
-                              <h4>Fifa 2022</h4>
-                              <p>For our members only $16.99</p>
-                              <a href="">Buy on Amazon.com</a>
-                          </div>
-                      </div>
-                      <!-- single item end -->
-                      <!-- single item start -->
-                      <div class="col-lg-4 mt-lg-0 mt-4">
-                          <div class="item">
-                              <h4>Grand Theft Auto 5</h4>
-                              <p>For our members only $12</p>
-                              <a href="">Buy on G2A.com</a>
-                          </div>
-                      </div>
-                      <!-- single item end -->
-                      <!-- single item start -->
-                      <div class="col-lg-4  mt-lg-0 mt-4">
-                          <div class="item">
-                              <h4>The Legend of Zelda</h4>
-                              <p>For our members only $19.99</p>
-                              <a href="">Buy on CloudGamers.com</a>
-                          </div>
-                      </div>
-                      <!-- single item end -->
-                  </div>
-              </div>
-          </div>
-          <!-- hot this end -->
-          <div class="contact" id="s5">
-            <div class="container">
-
-              <div class="common-text text-center">
-                  <h2>Other Information</h2>
-              </div>
-
-                <div class="row">
-
-                  <!-- single item start -->
-                  <div class="col-lg-3">
-                      <div class="item-left">
-                          <a href=""><img src="img/logo.png" alt="img" class="img-fluid"> </a>
-                      </div>
-                  </div>
-                  <!-- single item end -->
-
-
-
-
-                    <!-- single item start -->
-                    <div class="col-lg-9">
-                        <div class="item-right">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Contact Info</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Privacy Policy</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Terms and Conditions</button>
-                                </li>
-                                <!--<li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Disclaimer</button>
-                                </li>-->
-
-
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                                    <div class="contact-body">
-                                        <div class="row">
-                                            <div class="col-lg-5">
-                                                <div class="item-left-text">
-                                                    <h4>Gamers Paradise</h4>
-                                                    <p>Email: <a href="mailto: info@gamersparadise.com">info@gamersparadise.com</a></p>
-                                                    <p>Phone: <a href="tel: +38761225883">+38761225883</a></p>
-                                                    <p>Address: Francuske revolucije bb<br>
-                                                    71000 Sarajevo</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-7"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                                  At Gamers Paradise, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Gamers Paradise and how we use it.
-                                  If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.
-                                  This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in Gamers Paradise. This policy is not applicable to any information collected offline or via channels other than this website.
-                                </div>
-                                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-                                  Welcome to Gamers Paradise!
-                                  These terms and conditions outline the rules and regulations for the use of Gamers Paradise's Website.
-                                  By accessing this website we assume you accept these terms and conditions. Do not continue to use Gamers Paradise if you do not agree to take all of the terms and conditions stated on this page. Gamers Paradise reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single item end -->
-
-                </div>
-            </div>
-        </div>
-        <!-- footer start -->
-        <footer>
-            <div class="container text-center">
-                <p class="mb-0">Gamers Paradise © 2022. All rights reserved</p>
-            </div>
-        </footer>
-        <!-- footer end -->
+            <!-- Top rated end -->
+            
+            <div id="offers"></div>
         </main>
-    </body> 
-    <!--SKRIPTE-->
-    <script src="js/jquery.min.js"></script>
+        <div id="about"></div>
+
+        
+        <!-- Back to top button start -->
+        <button class="btn btn-outline-light" onclick="topFunction()" id="backToTopBtn" title="Go to top">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+              </svg>
+        </button> 
+        <!-- Back to top button end -->
+        <div id="footer">
+            
+        </div>
+    </body>
+    
+    <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/game-service.js"></script>
 
+    <script> 
+        $(function(){
+          $("#header").load("pages/header.html");
+          $("#offers").load("pages/offers.html");
+          $("#about").load("pages/about-us.html");
+          $("#footer").load("pages/footer.html"); 
+        });
+    </script> 
+    <script>
+        mybutton = document.getElementById("backToTopBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        } 
+    </script>
     
-    
-    <!--MODALS prvi je example modal-->
-    <div class="modal fade" id="exampleModalUniversal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
+    <!-- ViewGameDetailsModal -->
+    <div class="modal fade" id="viewGameDetailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog  modal-lg">
+          <div class="modal-content" style="color: black;">
+            <form id="editGameForm">         
+              <div class="modal-header " id="game_title">
+                
+              </div>
+              <div class="modal-body">
+                <input type="hidden" name="id" />
+                <div class="form-group">
+  
+                  <div class="input-group mb-3">
+                    <span class="input-group-text w-25 fs-6" id="game-name-addon">Name</span>
+                    <input name="name" type="text" class="form-control required" minlength="6" placeholder="Name" aria-describedby="game-name-addon">
+                  </div>
+  
+                  <div class="input-group mb-3 ">
+                    <span class="input-group-text w-25 fs-6" id="category-id-addon">Category</span>
+                    <input name="category_id" type="text" class="form-control required" minlength="1" placeholder="Category" aria-describedby="category-id-addon">
+                  </div>
+                  <div class="input-group mb-3 fs-6">
+                    <span class="input-group-text w-25" id="description-addon">Description</span>
+                    <textarea name="description" type="text" class="form-control required" maxlength="240" placeholder="Description" aria-describedby="description-addon"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalReview">Leave review</button>
+              </div>
+            </form>           
+          </div>
+        </div>
+      </div>
+
+      <!--ModalReview start-->
+      <div class="modal fade" id="ModalReview" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content"  style="color: black;">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="review-modal" style="color: black;">Leave a review</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    <!--EDIT USER MODAL-->    
-    <div class="modal fade text-dark" id="ModalEditGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <p class="modal-title" id="exampleModalLabel">Info about game</p>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <input id="id" type="hidden" placeholder="ID">
-              <input id="name" type="text" placeholder="name">
-              <input id="category_id" type="text" placeholder="category ID">
-              <input id="description" type="text" placeholder="description">
-              <!-- <input id="password" type="text" placeholder="password"> -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary save-changes-button" onclick="GameService.update()">Save</button>
-                <button type="button" class="btn btn-danger save-changes-button" onclick="GameService.delete(id)">Delete</button>
-              </div>
-          </div>
-        </div>
-      </div>
-    <!--ADD USER MODAL-->  
-    <div class="modal fade text-dark" id="ModalAddGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <form id="addGameForm">
-              <div class="modal-header">
-                <p class="modal-title" id="exampleModalLabel">Add game info pls</p>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-              <!-- <input id="addid" type="hidden" placeholder="ID">
-              <input id="addusername" type="text" placeholder="username">
-              <input id="addemail" type="text" placeholder="email">
-              <input id="addpassword" type="text" placeholder="password"> -->
-              
-              <div class="form-group">
-                <label>Game name</label>
-                <input name="name" type="text" class="form-control required" id="username1" placeholder="Enter game name">
-              </div>
-              <div class="form-group">
-                <label>Category</label>
-                <input name="category_id" type="text" class="form-control required" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter category ID">
-                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-              </div>
-              <div class="form-group">
-                <label>Description</label>
-                <input name="description" type="text" class="form-control required" id="exampleInputPassword1" placeholder="Enter description">
-              </div>
-            
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary save-changes-button" onclick="addNewItem()">Add user</button> -->
-                <button type="submit" class="btn btn-primary save-changes-button">Submit</button>
-              </div>
-            </form>
-          </div>
-        </div>
-    </div>
-  <!-- Skripta za pokretanje stranice i ucitavanje validacije -->
-  <script>
-    
-    GameService.init();
+                <form id="reviewGameForm" method="post">
+                    <div class="mb-3" id="gameTitle"></div>
 
-  </script>
+
+
+                    <div class="input-group mb-3">
+                      <label for="gameplayRange" class="form-label"><img src="img/001-sad.png" alt="">Gameplay</label>
+                      <input name="gameplayRange"  type="range" class="form-range" min="0" max="100" step="10" id="gameplayRange">
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <label for="performanceRange" class="form-label"><img src="img/002-growth.png" alt=""> Performance</label>
+                      <input name="performanceRange"  type="range" class="form-range" min="0" max="100" step="10" id="performanceRange">
+                    </div>
+                    
+                    <div class="d-flex mb-3">
+                        <label for="graphicsRange" class="form-label"><img src="img/003-graphic-design.png" alt=""> Graphics</label>
+                        <input name="graphicsRange"  type="range" class="form-range" min="0" max="100" step="10" id="graphicsRange">
+                    </div>
+                    <div class="d-flex mb-3">
+                        <label for="audioRange" class="form-label"><img src="img/004-headphone.png" alt=""> Audio</label>
+                        <input name="audioRange"  type="range" class="form-range" min="0" max="100" step="10" id="audioRange">
+                    </div>
+                    <div class="d-flex mb-3">
+                        <label for="satisfactionRange" class="form-label"><img src="img/005-satisfaction.png" alt=""> Satisfaction</label>
+                        <input name="satisfactionRange"  type="range" class="form-range" min="0" max="100" step="10" id="satisfactionRange">
+                    </div>
+                    <div class="d-flex mb-3">
+                        <label for="reviewComment" class="form-label">Comments (Optional)</label>
+                        <textarea name="reviewComment"  class="form-control" aria-label="Comments (Optional)" id="reviewComment"></textarea>
+                      </div>
+                    <button class="btn btn-primary" data-bs-target="#ModalGameDetails" data-bs-toggle="modal" type="submit">Submit</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--ModalReview end-->
+
+  <script>GameService.get_highest_rated(); </script>
 </html>

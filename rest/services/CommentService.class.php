@@ -10,5 +10,11 @@ class CommentService extends BaseService{
         parent::__construct(new CommentDao());
     }
 
+    
+
+    public function get_by_game_id($id){
+        return $this->dao->get_by_game_id($id);
+    }
+
 }
 ?>

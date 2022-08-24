@@ -9,7 +9,7 @@ class BaseDao{
 
         $servername = "localhost";
         $username = "root";
-        $password = "0000";
+        $password = "tarikproho1";
         $schema = "gamingblogdb";
 
         $this->conn = new PDO("mysql:host=$servername;dbname=$schema", $username, $password);
