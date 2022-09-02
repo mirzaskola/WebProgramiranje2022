@@ -26,11 +26,11 @@ var UserService = {
         dataType: "json",
         success: function(result) {
           console.log(result);
-          localStorage.setItem("token", result.token);
-          if(localStorage.getItem("token") === null || localStorage.getItem("token") === "undefined"){
+          if(result.token === null || result.token === 'undefined'){
             console.log("NE VALJA");
             window.location.replace("login.html");
           }
+          localStorage.setItem("token", result.token);
           window.location.replace("index.html");
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
