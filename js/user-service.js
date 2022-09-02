@@ -10,6 +10,12 @@ var UserService = {
           UserService.login(entity);
         }
       });
+      $('#signup-form').validate({
+        submitHandler: function(form) {
+          var entity = Object.fromEntries((new FormData(form)).entries());
+          UserService.signup(entity);
+        }
+      });
     },
     login: function(entity){
       $.ajax({
@@ -21,6 +27,21 @@ var UserService = {
         success: function(result) {
           console.log(result);
           localStorage.setItem("token", result.token);
+          window.location.replace("index.html");
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr.error(XMLHttpRequest.responseJSON.message);
+        }
+      });
+    },
+    signup: function(entity){
+      $.ajax({
+        url: 'rest/signup',
+        type: 'POST',
+        data: JSON.stringify(entity),
+        contentType: "application/json",
+        dataType: "json",
+        success: function(result) {
           window.location.replace("index.html");
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
