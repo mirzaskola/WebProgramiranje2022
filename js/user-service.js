@@ -27,9 +27,9 @@ var UserService = {
         success: function(result) {
           console.log(result);
           localStorage.setItem("token", result.token);
-          if(localStorage.getItem("token") == null || localStorage.getItem("token") == "undefined"){
+          if(localStorage.getItem("token") === null || localStorage.getItem("token") === "undefined"){
             console.log("NE VALJA");
-            window.location.replace("www.google.com");
+            window.location.replace("login.html");
           }
           window.location.replace("index.html");
         },
