@@ -26,12 +26,14 @@ var UserService = {
         dataType: "json",
         success: function(result) {
           console.log(result);
+          localStorage.setItem("token", result.token);
           if(typeof(localStorage.getItem("token")) === null || typeof(localStorage.getItem("token")) === 'undefined'){
             console.log("NE VALJA");
             window.location.replace("login.html");
           }
-          localStorage.setItem("token", result.token);
-          window.location.replace("index.html");
+          else{
+            window.location.replace("index.html");
+          }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
           toastr.error(XMLHttpRequest.responseJSON.message);
