@@ -26,7 +26,7 @@ var UserService = {
         dataType: "json",
         success: function(result) {
           console.log(result);
-          if(result.token === null || result.token === 'undefined'){
+          if(localStorage.getItem("token") === null || localStorage.getItem("token") === 'undefined'){
             console.log("NE VALJA");
             window.location.replace("login.html");
           }
