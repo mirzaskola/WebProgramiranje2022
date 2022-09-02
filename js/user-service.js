@@ -27,7 +27,7 @@ var UserService = {
         success: function(result) {
           console.log(result);
           localStorage.setItem("token", result.token);
-          if(localStorage.getItem("token") === null || typeof(localStorage.getItem("token")) === 'undefined'){
+          if(localStorage.getItem("token") === null || localStorage.token === 'undefined'){
             console.log("NE VALJA");
             window.location.replace("login.html");
           }
