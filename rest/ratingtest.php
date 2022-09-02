@@ -14,7 +14,7 @@ $servis = new GameService();
 // print_r($servis->get_game_by_name("Red"));
 // print_r($servis->get_highest_rated_games());
 print_r($servis->dao->get_game_by_name("stel"));
-
+print_r(Config::DB_PASSWORD());
 
 
 ?>
