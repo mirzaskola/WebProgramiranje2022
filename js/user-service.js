@@ -42,6 +42,7 @@ var UserService = {
         contentType: "application/json",
         dataType: "json",
         success: function(result) {
+          localStorage.setItem("token", result.token);
           window.location.replace("index.html");
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
