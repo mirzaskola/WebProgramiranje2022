@@ -23,7 +23,7 @@ class GameDao extends BaseDao{
             FROM game g
             JOIN rating r
                 ON r.game_id = g.id
-            GROUP BY g.name, g.id
+            GROUP BY g.name, g.id, g.image
             ORDER BY total_rating DESC
             LIMIT 6"
             );
