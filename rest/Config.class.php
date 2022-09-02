@@ -9,7 +9,7 @@ class Config {
     return Config::get_env("DB_USERNAME", "freedb_mirza_root");
   }
   public static function DB_PASSWORD(){
-    return Config::get_env("DB_PASSWORD", '3CTz%XMx$n3TJgX@');
+    return Config::get_env("DB_PASSWORD", "3CTz%XMx\$n3TJgX@");
   }
   public static function DB_SCHEME(){
     return Config::get_env("DB_SCHEME", "freedb_gamingblogdb");
