@@ -254,6 +254,9 @@ header nav ul.navbar-nav li.nav-item a.nav-link.sign-in-button:hover {
 .most-popular .slider-item{
     margin: 0 15px;
 }
+.most-popular .box .item-line.Lw::before{
+    width: var(--rating);
+ }
 .most-popular .box .item-line {
     width: 100%;
     height: 4px;

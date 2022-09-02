@@ -12,7 +12,8 @@
   <meta http-equiv="content-script-type" content="text/javascript">
   <meta http-equiv="x-dns-prefetch-control" content="on">
   <!-- Bootstrap css -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">  
+  <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
   <!-- Custom css -->
   <link rel="stylesheet" href="css/style.css">
   <title>Gamers Paradise | The most trusted review site</title>
@@ -36,29 +37,40 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                    <div class="card-body p-5 text-center">
-                        <div class="mb-md-5 mt-md-4 pb-5">
-                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                            <div class="form-outline form-white mb-4">
-                                <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-                                <label class="form-label" for="typeEmailX">Email</label>
+                    
+                        <div class="card-body p-5 text-center">
+                            <form id="login-form">
+                            <div class="mb-md-5 mt-md-4 pb-5">
+                                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                                <div class="form-outline form-white mb-4">
+                                    <input type="email" id="email" name="email" class="form-control form-control-lg" value="ado@gegaj.com"/>
+                                    <label class="form-label" for="email">Email</label>
+                                </div>
+                                <div class="form-outline form-white mb-4">
+                                    <input type="password" id="password" name="password" class="form-control form-control-lg" value="1234"/>
+                                    <label class="form-label" for="password">Password</label>
+                                </div>
+                                <!--<p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>-->
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                             </div>
-                            <div class="form-outline form-white mb-4">
-                                <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                                <label class="form-label" for="typePasswordX">Password</label>
-                            </div>
-                            <!--<p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>-->
-                            <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-                        </div>
-                        <div>
-                            <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a></p>
-                        </div>      
-                    </div>
+                            <div>
+                                <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a></p>
+                            </div>      
+                        </form> </div>
+                    
                 </div>
             </div>
         </div>
     </div>
     
-
 </body>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="js/user-service.js"></script>
+
+    <script type="text/javascript">
+        UserService.init();
+      </script>
 </html>

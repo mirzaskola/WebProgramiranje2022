@@ -8,10 +8,8 @@ class GameDao extends BaseDao{
         parent::__construct("game");  
     }
     public function get_game_by_name($name){
-        return $this->query("SELECT * FROM game WHERE name LIKE '%':name'%'", ['name' => $name]);
-    
+        return $this->query_no_param("SELECT * FROM game WHERE lower(name) LIKE '%".strtolower($name)."%'");
     }
-
     public function get_all_games_by_name(){
         return $this->query_no_param("SELECT name FROM game");
     }

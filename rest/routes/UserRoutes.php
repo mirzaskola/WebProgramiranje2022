@@ -1,39 +1,15 @@
 <?php
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
-// get all
-Flight::route('GET /users', function(){
-    $data = Flight::userService()->get_all();
-    Flight::json($data);
+Flight::route('POST /login', function(){
+    $login_data = Flight::request()->data->getData();
+    Flight::json(Flight::userService()->login($login_data));
 });
-
-//get one
-Flight::route('GET /users/@id', function($id){
-    $data = Flight::userService()->get_by_id($id);
-    Flight::json($data);
-});
-
-// update
-Flight::route('PUT /users/@id', function($id){
-    $request = Flight::request();
-    $data = $request->data->getData();
-    Flight::userService()->update($id, $data);
-    Flight::json($data);
-
-});
-
-// insert
-Flight::route('POST /users', function(){
-    $request = Flight::request();
-    $data = $request->data->getData();
-    $podaci = Flight::userService()->add($data);
-    Flight::json($podaci);
-
-});
-
-// delete
-Flight::route('DELETE /users/@id', function($id){
-    Flight::userService()->delete($id);
+Flight::route('GET /admin', function(){
+    $user = Flight::get('user');
+    Flight::json(Flight::userService()->check_user_role($user));
 });
 
 ?>

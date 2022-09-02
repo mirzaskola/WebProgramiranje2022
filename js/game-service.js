@@ -11,90 +11,106 @@ var GameService = {
       
         GameService.get_all_games_admin();
     },
-    
+
     get_highest_rated: function(){
-        $.get("rest/toprated", function(data){
-            var html = "";
-            for(let i = 0; i < data.length; i++){
-                html += `
-                            <div class="col-lg-4 mt-4">
-                                <div class="box text-start shadow">
-                                    <h4 class="text-center">`+data[i].name+`</h4>
-                                    <div class="img-box">
-                                        <img src="img/`+data[i].image+`" alt="img" class="img-fluid">
-                                        <div class="start">
-                                            <div class="star_inner">
-                                                <img src="img/star.png" alt="img" class="img-fluid">
-                                                <span class="d-inline-block">`+parseInt(data[i].total_rating)+`</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row ">
-                                        <div class="col-lg-3">
-                                            <div class="item-text">
-                                                <p class="mb-0">Gameplay</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9" >
-                                            <div class="item-line" style="width:`+parseInt(data[i].gameplay)+`%;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                            <div class="col-lg-3">
-                                                <div class="item-text">
-                                                    <p class="mb-0">Performance</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-9">
-                                                <div class="item-line" style="width:`+parseInt(data[i].preformance)+`%;"></div>
-                                            </div>
-                                    </div>
-
-                                    <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="item-text">
-                                            <p class="mb-0">Graphics</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="item-line" style="width:`+parseInt(data[i].graphics)+`%;"></div>
-                                    </div>
-                                    </div>
-
-                                    <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="item-text">
-                                            <p class="mb-0">Audio</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="item-line"  style="width:`+parseInt(data[i].audio)+`%;"></div>
-                                    </div>
-                                    </div>
-
-                                    <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="item-text">
-                                            <p class="mb-0">Satisfaction</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="item-line" style="width:`+parseInt(data[i].gameplay)+`%;"></div>
-                                    </div>
-                                    </div>
-                                    <br>
-                                    <div class=" d-flex justify-content-center">
-                                        <button class="btn btn-primary view-game-details" onclick="GameService.get(`+data[i].id+`)">
-                                            View details
-                                        </button>
+        $.ajax({
+            url: "rest/toprated",
+            type: "GET",
+            success: function(data) {
+                $("#top-rated").html("");
+                var html = "";
+                for (let i = 0; i < data.length; i++) {
+                    html +=`
+                        <div class="col-lg-4 mt-4">
+                        <div class="box text-start shadow">
+                            <h4 class="text-center">`+data[i].name+`</h4>
+                            <div class="img-box">
+                                <img src="img/`+data[i].image+`" alt="img" class="img-fluid">
+                                <div class="start">
+                                    <div class="star_inner">
+                                        <img src="img/star.png" alt="img" class="img-fluid">
+                                        <span class="d-inline-block">`+parseInt(data[i].total_rating)+`%</span>
                                     </div>
                                 </div>
                             </div>
-                            `;    
+
+                            <div class="row ">
+                                <div class="col-lg-3">
+                                    <div class="item-text">
+                                        <p class="mb-0">Gameplay</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9" >
+                                    <div class="item-line Lw" style="--rating:`+parseInt(data[i].gameplay)+`%;"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="item-text">
+                                        <p class="mb-0">Performance</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="item-line Lw" style="--rating:`+parseInt(data[i].performance)+`%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                            <div class="col-lg-3">
+                                <div class="item-text">
+                                    <p class="mb-0">Graphics</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="item-line Lw" style="--rating:`+parseInt(data[i].graphics)+`%;"></div>
+                            </div>
+                            </div>
+
+                            <div class="row">
+                            <div class="col-lg-3">
+                                <div class="item-text">
+                                    <p class="mb-0">Audio</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="item-line Lw" style="--rating:`+parseInt(data[i].audio)+`%;"></div>
+                            </div>
+                            </div>
+
+                            <div class="row">
+                            <div class="col-lg-3">
+                                <div class="item-text">
+                                    <p class="mb-0">Satisfaction</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="item-line Lw" style="--rating:`+parseInt(data[i].satisfaction)+`%;"></div>
+                            </div>
+                            </div>
+                            <br>
+                            <div class=" d-flex justify-content-center">
+                                <button class="btn btn-primary view-game-details" onclick="GameService.get(`+data[i].id+`)">
+                                    View details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                        `;
+                    
+                }
+            $("#top-rated").html(html);    
             }
-            $("#top-rated").html(html);
-        });    
+        });
+    },
+
+    redirect_to_login: function(){
+        var token = localStorage.getItem("token");
+        if(token == null || token == undefined){
+            window.location.replace("login.html");
+        }
+        else{
+            $("#ModalReview").modal("show");
+        }
     },
 
     get: function(id){
@@ -113,23 +129,65 @@ var GameService = {
               $('#editGameForm input[name="id"]').val(data.id);            
               $('#editGameForm input[name="name"]').val(data.name);
               $('#editGameForm input[name="category_id"]').val(data.category_id);
-              $('#editGameForm input[name="image"]').val(data.image);
-              $('#editGameForm input[name="icon"]').val(data.icon);
               $('#editGameForm textarea[name="description"]').val(data.description);
             
 
               $("#review-modal").html("");
               $("#review-modal").html(`<p class="fs-4"> Leave a review for ` + data.name + ` </p>`);
-            
+                
               $(".view-game-details").attr('disabled', false);
               $('#viewGameDetailsModal').modal("show");
             }
         });
     },
+    get_all_games_client: function(){
+        $.ajax({
+            url: "rest/games",
+            type: "GET",
+            success: function(data) {
+                $("#game-list").html("");
+                var html = "";
+                for (let i = 0; i < data.length; i++) {
+                    html +=`
+                    <!-- single item start -->
+                    <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
+                        <div class="box text-start shadow">
+                            <h4 class="text-center">`+ data[i].name +`</h4>
+                            <div class="text-center">
+                                <img src="img/`+ data[i].image +`" alt="img" class="img-fluid rounded"> 
+                            </div>
+                            <br>
+                            <div class="row justify-content-center">                                        
+                                <div class="col-md">
+                                    <div class="text-center">
+                                        <p class="text-sm-center">
+                                            `+ data[i].description +`
+                                        </p>
+                                    </div>                                            
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <!-- Button trigger modal -->
+                                    <button type="submit" class="btn btn-primary view-game-details" onclick="GameService.get(`+ data[i].id +`)">
+                                        View details
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- single item end -->
+                        `;
+                    
+                }
+            $("#game-list").html(html);    
+            }
+        });
+    },
     
-
-
-
 
 
 /*###### ADMIN PANEL #####*/
@@ -137,6 +195,9 @@ var GameService = {
         $.ajax({
             url: "rest/games",
             type: "GET",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
             success: function(data) {
                 $("#games-dashboard").html("");
                 var gameBodyHtml = "";
@@ -172,6 +233,9 @@ var GameService = {
         $.ajax({
             url: 'rest/games/'+id,
             type: "GET",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
             success: function(data) {
               $('#editGameForm input[name="id"]').val(data.id);
               $('#editGameForm input[name="name"]').val(data.name);
@@ -234,7 +298,7 @@ var GameService = {
     delete: function(id){
       $(".delete-game-button").attr('disabled', true);
       $.ajax({
-          url: 'rest/games/'+id,
+          url: 'rest/deletegames/'+id,
           type: 'DELETE',        
           success: function() {
             $(".delete-game-button").attr('disabled', false);

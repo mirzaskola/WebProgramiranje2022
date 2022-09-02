@@ -358,6 +358,7 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/game-service.js"></script>
     <script src="js/offer-service.js"></script>
+    <script src="js/user-service.js"></script>
     <script> 
       $(function(){        
         $("#footer").load("pages/footer.html"); 
@@ -384,8 +385,9 @@
         } 
     </script>
     <script>
-      GameService.init();
-      OfferService.init(); 
+        GameService.get_all_games_admin();
+        OfferService.get_all_offers_admin();
+      
     </script>
 
 </html>

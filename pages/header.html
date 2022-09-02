@@ -1,5 +1,5 @@
 <!-- Navbar start-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navbar" style="background-color: black;">
+<nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navbar" style="background-color: black;">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.html" style="margin-right: 20px;">
             <img src="favicon.ico" alt="Blog logo" class="d-inline-block align-text-top">
@@ -34,12 +34,14 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end" style="font-size: 12px;">
             <li><a class="dropdown-item" href="#">View your profile</a> </li>
-            <li><a class="dropdown-item" href="admin-panel.html" id="adminPanelItem">Admin panel</a></li>
+            <li><a class="dropdown-item" href="admin-panel.html" id="adminPanelItem" role="button" onclick="UserService.check_user_role();">Admin panel</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Log out</a></li>
+            <li><a class="dropdown-item" href="login.html" role="button" onclick="UserService.logout();">Log out</a></li>
             </ul>
         </div>
     </div>
     </div>
 </nav>
+<script src="../js/user-service.js"></script>
+
 <!-- Navbar end-->

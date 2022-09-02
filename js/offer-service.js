@@ -35,7 +35,7 @@ var OfferService = {
                 $("#offerBody").html(offerBodyHtml);
 
                 if(data.length === 0){
-                    $("#offerHeader").html('<h2>Currently there is no special offers from our partners</h2>');
+                    $("#offerHeader").html('<h2>Currently there are no special offers from our partners</h2>');
                 }
             }
         });
@@ -47,6 +47,9 @@ var OfferService = {
         $.ajax({
             url: "rest/offers",
             type: "GET",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
             success: function(data) {
                 $("#offers-dashboard").html("");
                 var offerBodyHtml = "";
@@ -84,6 +87,9 @@ var OfferService = {
         $.ajax({
             url: 'rest/offers/'+id,
             type: "GET",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
             success: function(data) {
               $('#editOfferForm input[name="id"]').val(data.id);
               $('#editOfferForm input[name="link"]').val(data.link);
@@ -105,6 +111,9 @@ var OfferService = {
         $.ajax({
             url: 'rest/offers',
             type: 'POST',
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
             data: JSON.stringify(offer),
             contentType: "application/json",
             dataType: "json",
@@ -131,6 +140,9 @@ var OfferService = {
         $.ajax({
         url: 'rest/offers/' + $('#editOfferForm input[name="id"]').val(),
         type: 'PUT',
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
         data: JSON.stringify(offer),
         contentType: "application/json",
         dataType: "json",
@@ -149,6 +161,9 @@ var OfferService = {
         $.ajax({
         url: 'rest/offers/'+id,
         type: 'DELETE',
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
         success: function() {
             $('.delete-offer-button').attr('disabled', false);
             $("#offer-list").html("");

@@ -35,7 +35,7 @@ Flight::route('POST /games', function(){
 });
 
 // delete
-Flight::route('DELETE /games/@id', function($id){
+Flight::route('DELETE /deletegames/@id', function($id){
     Flight::gameService()->delete($id);
     Flight::json(["message"=>"deleted"]);
 });

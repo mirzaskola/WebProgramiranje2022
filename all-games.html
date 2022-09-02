@@ -63,7 +63,8 @@
                     <br><br>            
                     <div class="most-body text-center">                        
                         <!-- row start -->
-                        <div id="game-list" class="row justify-content-center">
+                        <!--  justify-content-center JE BIO OVDJE DA SE CENTRIRA -->
+                        <div id="game-list" class="row">
                            
                             <!-- single item start -->
                             <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
@@ -354,6 +355,7 @@
             
             <div id="offers"></div>
         </main>
+        <div id="about"></div>
         
 
         <!-- Back to top button start -->
@@ -371,6 +373,11 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/game-service.js"></script>
 
+
+
+    <script>
+        GameService.get_all_games_client();
+    </script>
     <script>
         mybutton = document.getElementById("backToTopBtn");
 
@@ -399,6 +406,90 @@
           $("#footer").load("pages/footer.html"); 
         });
     </script> 
+
+    
+    <!-- ViewGameDetailsModal -->
+    <div class="modal fade" id="viewGameDetailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog  modal-lg">
+          <div class="modal-content" style="color: black;">
+            <form id="editGameForm">
+                      
+              <div class="modal-header " id="game_title">
+                
+              </div>
+              <div class="modal-body">
+                <input type="hidden" name="id" />
+                <div class="form-group">
+  
+                  <div class="input-group mb-3">
+                    <span class="input-group-text w-25 fs-6" id="game-name-addon">Name</span>
+                    <input name="name" type="text" class="form-control required" minlength="6" placeholder="Name" aria-describedby="game-name-addon">
+                  </div>
+  
+                  <div class="input-group mb-3 ">
+                    <span class="input-group-text w-25 fs-6" id="category-id-addon">Category</span>
+                    <input name="category_id" type="text" class="form-control required" minlength="1" placeholder="Category" aria-describedby="category-id-addon">
+                  </div>
+                  <div class="input-group mb-3 fs-6">
+                    <span class="input-group-text w-25" id="description-addon">Description</span>
+                    <textarea name="description" type="text" class="form-control required" maxlength="240" placeholder="Description" aria-describedby="description-addon"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" onclick="GameService.redirect_to_login();">Leave review</button>
+              </div>
+              
+            </form>           
+          </div>
+        </div>
+      </div>
+
+      <!--ModalReview start-->
+      <div class="modal fade" id="ModalReview" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content"  style="color: black;">
+            <div class="modal-header">
+              <h5 class="modal-title" id="review-modal" style="color: black;">Leave a review</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="reviewGameForm" method="post">
+                    <div class="mb-3" id="gameTitle"></div>
+
+                    <div class="input-group mb-3">
+                      <label for="gameplayRange" class="form-label"><img src="img/001-sad.png" alt="">Gameplay</label>
+                      <input name="gameplayRange"  type="range" class="form-range" min="0" max="100" step="10" id="gameplayRange">
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <label for="performanceRange" class="form-label"><img src="img/002-growth.png" alt=""> Performance</label>
+                      <input name="performanceRange"  type="range" class="form-range" min="0" max="100" step="10" id="performanceRange">
+                    </div>
+                    
+                    <div class="d-flex mb-3">
+                        <label for="graphicsRange" class="form-label"><img src="img/003-graphic-design.png" alt=""> Graphics</label>
+                        <input name="graphicsRange"  type="range" class="form-range" min="0" max="100" step="10" id="graphicsRange">
+                    </div>
+                    <div class="d-flex mb-3">
+                        <label for="audioRange" class="form-label"><img src="img/004-headphone.png" alt=""> Audio</label>
+                        <input name="audioRange"  type="range" class="form-range" min="0" max="100" step="10" id="audioRange">
+                    </div>
+                    <div class="d-flex mb-3">
+                        <label for="satisfactionRange" class="form-label"><img src="img/005-satisfaction.png" alt=""> Satisfaction</label>
+                        <input name="satisfactionRange"  type="range" class="form-range" min="0" max="100" step="10" id="satisfactionRange">
+                    </div>
+                    <div class="d-flex mb-3">
+                        <label for="reviewComment" class="form-label">Comments (Optional)</label>
+                        <textarea name="reviewComment"  class="form-control" aria-label="Comments (Optional)" id="reviewComment"></textarea>
+                      </div>
+                    <button class="btn btn-primary" data-bs-target="#ModalGameDetails" data-bs-toggle="modal" type="submit">Submit</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    
 </html>
 
 
