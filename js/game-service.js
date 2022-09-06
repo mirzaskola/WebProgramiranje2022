@@ -1,14 +1,35 @@
 var GameService = {
 
-    init: function(){
+    init: function () {
         $('#addGameForm').validate({
-            submitHandler: function(form) {
-              var game = Object.fromEntries((new FormData(form)).entries());
-              console.log(game);
-              GameService.add(game);
+            submitHandler: function (form) {
+                var game = Object.fromEntries((new FormData(form)).entries());
+                console.log(game);
+                GameService.add(game);
             }
-          });
-      
+        });
+        $('#search-form').validate({
+            submitHandler: function (form) {
+                var name = Object.fromEntries((new FormData(form)).entries());
+                console.log(name);
+                GameService.get_game_by_name(name);
+            }
+        });
+        $('#reviewGameForm').validate({
+            submitHandler: function (form) {
+                var review = Object.fromEntries((new FormData(form)).entries());
+                console.log(review);
+                GameService.leave_review(review);
+            }
+        });
+        $('#editGameForm').validate({
+            submitHandler: function (form) {
+                var game = Object.fromEntries((new FormData(form)).entries());
+                console.log(game);
+                GameService.update(game);
+            }
+        });
+
         GameService.get_all_games_admin();
     },
 
@@ -130,11 +151,12 @@ var GameService = {
               $('#editGameForm input[name="name"]').val(data.name);
               $('#editGameForm input[name="category_id"]').val(data.category_id);
               $('#editGameForm textarea[name="description"]').val(data.description);
-            
+                
 
               $("#review-modal").html("");
               $("#review-modal").html(`<p class="fs-4"> Leave a review for ` + data.name + ` </p>`);
-                
+              $('#reviewGameForm input[name="game_id"]').val(data.id);  
+              
               $(".view-game-details").attr('disabled', false);
               $('#viewGameDetailsModal').modal("show");
             }
@@ -184,6 +206,75 @@ var GameService = {
                     
                 }
             $("#game-list").html(html);    
+            }
+        });
+    },
+    get_game_by_name: function(name){
+        $.ajax({
+            url: 'rest/games-search',
+            type: 'POST',
+            data: JSON.stringify(name),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $("#game-list").html("");
+                var html = "";
+                for (let i = 0; i < data.length; i++) {
+                    html += `
+                    <!-- single item start -->
+                    <div class="col-sm-8 col-md-9 col-lg-6 col-xl-3 mb-3">
+                        <div class="box text-start shadow">
+                            <h4 class="text-center">`+ data[i].name + `</h4>
+                            <div class="text-center">
+                                <img src="img/`+ data[i].image + `" alt="img" class="img-fluid rounded"> 
+                            </div>
+                            <br>
+                            <div class="row justify-content-center">                                        
+                                <div class="col-md">
+                                    <div class="text-center">
+                                        <p class="text-sm-center">
+                                            `+ data[i].description + `
+                                        </p>
+                                    </div>                                            
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <!-- Button trigger modal -->
+                                    <button class="btn btn-primary view-game-details" onclick="GameService.get(`+ data[i].id + `)">
+                                        View details
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- single item end -->
+                        `;
+
+                }
+                $("#game-list").html(html);
+            }
+        });
+    },
+    leave_review: function(review){
+        $.ajax({
+            url: 'rest/review',
+            type: 'POST',
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            data: JSON.stringify(review),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (result) {
+                // $("#review-modal").modal("hide");
+                // $(".save-changes-button").attr('disabled', false);
+                // $("#game-list").html("");
+                console.log(result);
+                GameService.get_all_games_client();
             }
         });
     },
@@ -251,23 +342,23 @@ var GameService = {
       },
       
       
-    update: function(){
+    update: function(entity){
 
         $(".save-changes-button").attr('disabled', true);
 
-        var game = {
-              id: $('#editGameForm input[name="id"]').val(),
-              name: $('#editGameForm input[name="name"]').val(),
-              category_id: $('#editGameForm input[name="category_id"]').val(),
-              image: $('#editGameForm input[name="image"]').val(),
-              icon: $('#editGameForm input[name="icon"]').val(),
-              description: $('#editGameForm textarea[name="description"]').val() 
-            };
+        // var game = {
+        //       id: $('#editGameForm input[name="id"]').val(),
+        //       name: $('#editGameForm input[name="name"]').val(),
+        //       category_id: $('#editGameForm input[name="category_id"]').val(),
+        //       image: $('#editGameForm input[name="image"]').val(),
+        //       icon: $('#editGameForm input[name="icon"]').val(),
+        //       description: $('#editGameForm textarea[name="description"]').val() 
+        //     };
            
         $.ajax({
             url: 'rest/games/'+$('#editGameForm input[name="id"]').val(),
             type: 'PUT',
-            data: JSON.stringify(game),
+            data: JSON.stringify(entity),
             dataType: 'json',
             contentType: 'application/json',
             success: function (result) {
@@ -284,6 +375,9 @@ var GameService = {
             $.ajax({
             url: 'rest/games',
             type: 'POST',
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
             data: JSON.stringify(game),
             contentType: "application/json",
             dataType: "json",
@@ -299,7 +393,10 @@ var GameService = {
       $(".delete-game-button").attr('disabled', true);
       $.ajax({
           url: 'rest/deletegames/'+id,
-          type: 'DELETE',        
+          type: 'DELETE', 
+          beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+          },       
           success: function() {
             $(".delete-game-button").attr('disabled', false);
             $("#game-list").html("");

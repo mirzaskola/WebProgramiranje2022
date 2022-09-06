@@ -3,16 +3,16 @@
 class Config {
 
   public static function DB_HOST(){
-    return Config::get_env("DB_HOST", "sql.freedb.tech");
+    return Config::get_env("DB_HOST", "localhost");
   }
   public static function DB_USERNAME(){
-    return Config::get_env("DB_USERNAME", "freedb_mirza_root");
+    return Config::get_env("DB_USERNAME", "root");
   }
   public static function DB_PASSWORD(){
-    return Config::get_env("DB_PASSWORD", "RYQ\$X\$S56m5WWke");
+    return Config::get_env("DB_PASSWORD", "0000");
   }
   public static function DB_SCHEME(){
-    return Config::get_env("DB_SCHEME", "freedb_gamingblogdb");
+    return Config::get_env("DB_SCHEME", "gamingblogdb");
   }
   public static function DB_PORT(){
     return Config::get_env("DB_PORT", "3306");

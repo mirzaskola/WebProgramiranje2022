@@ -13,8 +13,6 @@ class GameDao extends BaseDao{
     public function get_all_games_by_name(){
         return $this->query_no_param("SELECT name FROM game");
     }
-
-
     public function get_highest_rated_games(){
         return $this->query_no_param(
             "SELECT g.id, g.name, g.image, AVG(r.gameplay_rating) as gameplay, AVG(r.performance_rating) as performance,

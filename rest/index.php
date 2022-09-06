@@ -13,6 +13,7 @@ require_once __DIR__.'/services/UserService.class.php';
 require_once __DIR__.'/services/GameService.class.php';
 require_once __DIR__.'/services/CommentService.class.php';
 require_once __DIR__.'/services/OfferService.class.php';
+require_once __DIR__.'/services/RatingService.class.php';
 require_once __DIR__.'/dao/UserDao.class.php';
 
 
@@ -30,7 +31,7 @@ Flight::route('/*', function(){
     //perform JWT decode
     $path = Flight::request()->url;
     $method = Flight::request()->method;
-    if ($path == '/login' || $path == '/docs.json' || $path == '/toprated' || $path == '/allnames' || $path == '/offers' || ($path == '/games' && $method == 'GET') || str_contains($path, 'games/') || $path == '/signup') return TRUE; // exclude login route from middleware
+    if ($path == '/login' || $path == '/docs.json' || $path == '/toprated' || $path == '/allnames' || $path == '/offers' || ($path == '/games' && $method == 'GET') || str_contains($path, 'games/') || $path == '/signup' || $path == '/games-search') return TRUE; // exclude login route from middleware
   
     $headers = getallheaders();
     if (@!$headers['Authorization']){
@@ -59,6 +60,7 @@ require_once __DIR__.'/routes/UserRoutes.php';
 require_once __DIR__.'/routes/GameRoutes.php';
 require_once __DIR__.'/routes/CommentRoutes.php';
 require_once __DIR__.'/routes/OfferRoutes.php';
+require_once __DIR__.'/routes/RatingRoutes.php';
 
 Flight::start();
 

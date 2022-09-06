@@ -170,30 +170,34 @@
                     <div class="mb-3" id="gameTitle"></div>
 
                     <div class="input-group mb-3">
+                      <input name="game_id" id="game_id" type="hidden">
+                    </div>
+                    
+                    <div class="input-group mb-3">
                       <label for="gameplayRange" class="form-label"><img src="img/001-sad.png" alt="">Gameplay</label>
-                      <input name="gameplayRange"  type="range" class="form-range" min="0" max="100" step="10" id="gameplayRange">
+                      <input name="gameplay_rating"  type="range" class="form-range" min="0" max="100" step="10" id="gameplayRange">
                     </div>
 
                     <div class="input-group mb-3">
                       <label for="performanceRange" class="form-label"><img src="img/002-growth.png" alt=""> Performance</label>
-                      <input name="performanceRange"  type="range" class="form-range" min="0" max="100" step="10" id="performanceRange">
+                      <input name="performance_rating"  type="range" class="form-range" min="0" max="100" step="10" id="performanceRange">
                     </div>
                     
                     <div class="d-flex mb-3">
                         <label for="graphicsRange" class="form-label"><img src="img/003-graphic-design.png" alt=""> Graphics</label>
-                        <input name="graphicsRange"  type="range" class="form-range" min="0" max="100" step="10" id="graphicsRange">
+                        <input name="graphics_rating"  type="range" class="form-range" min="0" max="100" step="10" id="graphicsRange">
                     </div>
                     <div class="d-flex mb-3">
                         <label for="audioRange" class="form-label"><img src="img/004-headphone.png" alt=""> Audio</label>
-                        <input name="audioRange"  type="range" class="form-range" min="0" max="100" step="10" id="audioRange">
+                        <input name="audio_rating"  type="range" class="form-range" min="0" max="100" step="10" id="audioRange">
                     </div>
                     <div class="d-flex mb-3">
                         <label for="satisfactionRange" class="form-label"><img src="img/005-satisfaction.png" alt=""> Satisfaction</label>
-                        <input name="satisfactionRange"  type="range" class="form-range" min="0" max="100" step="10" id="satisfactionRange">
+                        <input name="satisfaction_rating"  type="range" class="form-range" min="0" max="100" step="10" id="satisfactionRange">
                     </div>
                     <div class="d-flex mb-3">
                         <label for="reviewComment" class="form-label">Comments (Optional)</label>
-                        <textarea name="reviewComment"  class="form-control" aria-label="Comments (Optional)" id="reviewComment"></textarea>
+                        <textarea name="comment"  class="form-control" aria-label="Comments (Optional)" id="reviewComment"></textarea>
                       </div>
                     <button class="btn btn-primary" data-bs-target="#ModalGameDetails" data-bs-toggle="modal" type="submit">Submit</button>
                 </form>
@@ -202,7 +206,9 @@
         </div>
       </div>
       <!--ModalReview end-->
+
     <script>
+      GameService.init();
       GameService.get_highest_rated();
     </script>
   <!-- <script>

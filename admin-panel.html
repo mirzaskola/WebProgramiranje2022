@@ -70,6 +70,9 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="#user-dashboard" style="color: #fff; margin-right: 20px;">Users</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#user-activities" style="color: #fff; margin-right: 20px;">Recent user activities</a>
                     </li>
                 </ul>
@@ -83,7 +86,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" style="font-size: 12px;">
                       <li><a class="dropdown-item" href="index.html">Back to homepage</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Log out</a></li>
+                      <li><a class="dropdown-item" onclick="UserService.logout()">Log out</a></li>
                     </ul>
                 </div>
               </div>
@@ -97,6 +100,7 @@
             <button class="btn btn-outline-primary btn-lg me-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewGameModal">  Add new game </button>
             <button class="btn btn-outline-primary btn-lg ms-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewOfferModal"> Add new offer </button>
             <button class="btn btn-outline-primary btn-lg ms-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewCategoryModal"> Add new category </button>                                
+            <button class="btn btn-outline-primary btn-lg ms-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewUserModal"> Add new user </button>                                
           </div>
           <!-- Add button group end-->
 
@@ -125,15 +129,36 @@
                       <tr>
                         <th class="text-start" scope="col">Game name</th>
                         <th class="text-start" scope="col">Partner name</th>
+                        <th class="text-start" scope="col">link</th>
                         <th class="text-start" scope="col">Price</th>
-                        <th class="text-start" scope="col">Actions</th>
-                        <th class="text-start" scope="col">Active</th>                         
+                        <th class="text-start" scope="col">Active</th>
+                        <th class="text-start" scope="col">Actions</th>                         
                       </tr>
                     </thead>
                     <tbody id="offers-dashboard"></tbody>
                 </table>
             </div>
             <!-- Offers dashboard end-->
+
+            <!-- Users dashboard start-->           
+            <div class="container-fluid mt-5 justify-content-center table-responsive my-3 p-3 rounded shadow-sm" >          
+                <table class="table table-striped table-hover caption-top  d-table">
+                  <caption>List of all users</caption>
+                    <thead>
+                      <tr>
+                        <th class="text-start" scope="col">User ID</th>
+                        <th class="text-start" scope="col">Username</th>
+                        <th class="text-start" scope="col">Email</th>
+                        <th class="text-start" scope="col">Password</th>
+                        <th class="text-start" scope="col">User Role</th>
+                        <th class="text-start" scope="col">Actions</th>
+                      
+                      </tr>
+                    </thead>
+                    <tbody id="user-dashboard"></tbody>
+                </table>
+            </div>
+            <!-- Users dashboard end-->
 
             <!-- User activities start-->
             <div class="container-fluid mt-5" id="user-activities" style="color: black;">
@@ -194,21 +219,30 @@
             <div class="modal-body">
               <div class="form-group">
                 
-                <label class="form-label"> Enter game name: </label>
-                <input name="name" type="text" class="form-control required" minlength="3" placeholder="Game name">                
-                
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="game-name-addon">Game name</span>
+                  <input name="name" type="text" class="form-control required" placeholder="Game name" aria-describedby="game-name-addon">
+                </div>
 
-                <label class="form-label"> Enter game category: </label>
-                <input name="category_id" type="number" class="form-control required" maxlength="1" placeholder="Game category"> <br />
-              
-                <label class="form-label"> Enter image name: </label>
-                <input name="image" type="text" class="form-control" placeholder="Enter image name: "> <br />
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="category-id-addon">Category</span>
+                  <input name="category_id" type="text" class="form-control required" minlength="1" placeholder="Category" aria-describedby="category-id-addon">
+                </div>
 
-                <label class="form-label"> Enter icon name: </label>
-                <input name="icon" type="text" class="form-control" placeholder="Enter icon name: "> <br />
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="image-addon">Image name</span>
+                  <input name="image" type="text" class="form-control required" placeholder="Image name" aria-describedby="image-addon">
+                </div>
 
-                <label class="form-label"> Enter game description: </label>
-                <textarea name="description" type="text-area" class="form-control" maxlength="250" placeholder="Game description"> </textarea> <br/>
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="icon-addon">Icon name</span>
+                  <input name="icon" type="text" class="form-control" placeholder="Icon name" aria-describedby="icon-addon">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="description-addon">Description</span>
+                  <textarea name="description" type="text" class="form-control required" maxlength="240" placeholder="Description" aria-describedby="description-addon"></textarea>
+                </div>
               </div>
             </div>
             <div class="modal-footer">
@@ -245,7 +279,7 @@
 
                 <div class="input-group mb-3">
                   <span class="input-group-text w-25" id="image-addon">Image name</span>
-                  <input name="image" type="text" class="form-control" placeholder="Image name" aria-describedby="image-addon">
+                  <input name="image" type="text" class="form-control required" placeholder="Image name" aria-describedby="image-addon">
                 </div>
 
                 <div class="input-group mb-3">
@@ -261,7 +295,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary save-changes-button" onclick="GameService.update()">Save changes</button>
+              <button type="submit" class="btn btn-primary save-changes-button">Save changes</button>
             </div>
           </form>           
         </div>
@@ -282,21 +316,30 @@
             <div class="modal-body">
               <div class="form-group">
                 
-                <label class="form-label"> Enter game name: </label>
-                <input name="name" type="text" class="form-control required" minlength="3" placeholder="Game name">                
-                
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="game-name-addon">Game name</span>
+                  <input name="game_name" type="text" class="form-control required" minlength="6" placeholder="Game name" aria-describedby="game-name-addon">
+                </div>
 
-                <label class="form-label"> Enter game category: </label>
-                <input name="category_id" type="number" class="form-control required" maxlength="1" placeholder="Game category"> <br />
-              
-                <label class="form-label"> Enter image name: </label>
-                <input name="image" type="text" class="form-control" placeholder="Enter image name: "> <br />
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="partner-name-addon">Partner name</span>
+                  <input name="partner_name" type="text" class="form-control required" minlength="1" placeholder="Partner name" aria-describedby="partner-name-addon">
+                </div>
 
-                <label class="form-label"> Enter icon name: </label>
-                <input name="icon" type="text" class="form-control" placeholder="Enter icon name: "> <br />
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="partner-name-addon">link</span>
+                  <input name="link" type="text" class="form-control required" minlength="1" placeholder="Link" aria-describedby="partner-name-addon">
+                </div>
 
-                <label class="form-label"> Enter game description: </label>
-                <textarea name="description" type="text-area" class="form-control" maxlength="250" placeholder="Game description"> </textarea> <br/>
+                <div class="input-group mb-3">
+                  <span class="input-group-text  w-25" id="price-addon">Price</span>
+                  <input name="price" type="text" class="form-control required" placeholder="Price" aria-describedby="price-addon">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="active-addon">Active</span>
+                  <input name="is_active" type="text" class="form-control required" placeholder="Active" aria-describedby="active-addon">
+                </div>
               </div>
             </div>
             <div class="modal-footer">
@@ -318,9 +361,8 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <input type="hidden" name="id" />
-              <input type="hidden" name="link" />
-              <div class="form-group">
+                <input type="hidden" name="id" />
+                <div class="form-group">
 
                 <div class="input-group mb-3">
                   <span class="input-group-text w-25" id="game-name-addon">Game name</span>
@@ -333,25 +375,119 @@
                 </div>
 
                 <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="partner-name-addon">link</span>
+                  <input name="link" type="text" class="form-control required" minlength="1" placeholder="Partner name" aria-describedby="partner-name-addon">
+                </div>
+
+                <div class="input-group mb-3">
                   <span class="input-group-text  w-25" id="price-addon">Price</span>
-                  <input name="price" type="text" class="form-control" placeholder="Price" aria-describedby="price-addon">
+                  <input name="price" type="text" class="form-control required" placeholder="Price" aria-describedby="price-addon">
                 </div>
 
                 <div class="input-group mb-3">
                   <span class="input-group-text w-25" id="active-addon">Active</span>
-                  <input name="is_active" type="text" class="form-control" placeholder="Active" aria-describedby="active-addon">
+                  <input name="is_active" type="text" class="form-control required" placeholder="Active" aria-describedby="active-addon">
                 </div>
 
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary save-changes-button" onclick="OfferService.update()">Save changes</button>
+              <button type="submit" class="btn btn-primary save-changes-button">Save changes</button>
             </div>
           </form>           
         </div>
       </div>
     </div>
+
+    <!-- AddNewUserModal -->
+    <div class="modal fade" id="addNewUserModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog  modal-lg">
+        <div class="modal-content" style="color: black;">
+          <form id="addUserForm">         
+            <div class="modal-header">
+              <p class="modal-title fs-4">Add user</p>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="username-addon">Username</span>
+                  <input name="username" type="text" class="form-control required" minlength="6" placeholder="Username" aria-describedby="username-addon">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="email-addon">Email</span>
+                  <input name="email" type="email" class="form-control required" minlength="1" placeholder="Email" aria-describedby="email-addon">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="password-addon">Password</span>
+                  <input name="password" type="password" class="form-control required" minlength="1" placeholder="Password" aria-describedby="password-addon">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text  w-25" id="user-role-addon">User role</span>
+                  <input name="user_role" type="number" class="form-control required" min="0" max="1" value="0" placeholder="User role" aria-describedby="user-role-addon">
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary save-changes-button">Save changes</button>
+            </div>
+          </form>           
+        </div>
+      </div>
+    </div>
+
+    <!-- EditUserModal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog  modal-lg">
+        <div class="modal-content" style="color: black;">
+          <form id="editUserForm">         
+            <div class="modal-header">
+              <p class="modal-title fs-4">Edit user</p>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="id" />
+                <div class="form-group">
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="username-addon">Username</span>
+                  <input name="username" type="text" class="form-control required" placeholder="Username" aria-describedby="username-addon">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="email-addon">Email</span>
+                  <input name="email" type="email" class="form-control required" minlength="1" placeholder="Email" aria-describedby="email-addon">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="password-addon">Password</span>
+                  <input name="password" type="password" class="form-control required" minlength="1" placeholder="Password" aria-describedby="password-addon">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text  w-25" id="user-role-addon">User role</span>
+                  <input name="user_role" type="number" class="form-control required" min="0" max="1" placeholder="User role" aria-describedby="user-role-addon">
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary save-changes-button">Save changes</button>
+            </div>
+          </form>           
+        </div>
+      </div>
+    </div>
+
+    
 
     <script src="js/jquery-3.6.0.min.js"></script>    
     <script src="js/jquery.validate.min.js"></script>
@@ -385,9 +521,36 @@
         } 
     </script>
     <script>
+      $('#addUserForm').validate({
+        submitHandler: function(form) {
+          var entity = Object.fromEntries((new FormData(form)).entries());
+          UserService.add(entity);
+        }
+      });
+    </script>
+    <script>
+      $('#editUserForm').validate({
+        submitHandler: function(form) {
+          var entity = Object.fromEntries((new FormData(form)).entries());
+          UserService.update(entity);
+        }
+      });
+    </script>
+    <!-- <script>
+      $('#editOfferForm').validate({
+        submitHandler: function(form) {
+          var offer = Object.fromEntries((new FormData(form)).entries());
+
+          OfferService.update(offer);
+        }
+      });
+    </script>   -->
+    <script>
+        GameService.init();
         GameService.get_all_games_admin();
+        OfferService.init();
         OfferService.get_all_offers_admin();
-      
+        UserService.get_all_users_admin();
     </script>
 
 </html>

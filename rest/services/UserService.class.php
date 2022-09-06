@@ -21,9 +21,9 @@ class UserService extends BaseService{
             if($user['password'] == md5($login_data['password'])){
                 unset($user['password']);
                 $jwt = JWT::encode($user, Config::JWT_SECRET(), 'HS256');
-                return ['token' => $jwt];
+                return (['message' => $jwt, 'code' => 200]);
             }else{
-                return (["message" => "Wrong password", 'code' => 404]);
+                return (['message' => "Wrong password", 'code' => 404]);
             }
         }else{
             return (['message' => "User doesn't exist", 'code' => 404]);

@@ -15,7 +15,6 @@ class GameService extends BaseService{
     public function get_highest_rated_games(){
         return $this->dao->get_highest_rated_games();
     }
-
     public function get_all_games_by_name(){
         return $this->dao->get_all_games_by_name();
     }
