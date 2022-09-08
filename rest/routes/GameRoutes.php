@@ -9,7 +9,7 @@ Flight::route('GET /games', function(){
 
 //get one
 Flight::route('GET /games/@id', function($id){
-    $data = Flight::gameService()->get_by_id($id);
+    $data = Flight::gameService()->get_by_id_with_category($id);
     Flight::json($data);
 });
 
@@ -58,8 +58,14 @@ Flight::route('GET /allnames', function(){
 Flight::route('POST /games-search', function(){
     $request = Flight::request();
     $name = $request->data->getData();
-    $data = Flight::gameService()->get_game_by_name($name);
-    Flight::json($data);
+    if (strlen($name['search']) >= 1){
+        $data = Flight::gameService()->get_game_by_name($name['search']);
+        Flight::json($data);
+    }
+    else{
+        Flight::json(Flight::gameService()->get_all());
+    }
+    
 });
 
 ?>

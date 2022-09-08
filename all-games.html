@@ -136,7 +136,7 @@
     </script> 
     <!-- ViewGameDetailsModal -->
     <div class="modal fade" id="viewGameDetailsModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog  modal-lg">
+        <div class="modal-dialog  modal-lg bg-dark">
           <div class="modal-content" style="color: black;">
             <form id="editGameForm">
                       
@@ -161,6 +161,16 @@
                     <textarea name="description" type="text" class="form-control required" maxlength="240" placeholder="Description" aria-describedby="description-addon"></textarea>
                   </div>
                 </div>
+                <!-- User activities start bio je mt-5-->
+                  <div class="container-fluid" id="user-activities" style="color: black;">
+                    <div class="my-3 p-3 bg-body rounded shadow-sm" id="review-list">
+                        
+                        <small>
+                        <a href="#">All updates</a>
+                        </small>
+                    </div>
+                  </div>
+          <!-- User activities end-->
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" onclick="GameService.redirect_to_login();">Leave review</button>

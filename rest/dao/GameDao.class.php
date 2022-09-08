@@ -25,7 +25,15 @@ class GameDao extends BaseDao{
             ORDER BY total_rating DESC
             LIMIT 6"
             );
-        }
+    }
+    public function get_by_id_with_category($id){
+        $response = $this->query("SELECT g.id as id, g.name as name, g.description as description, c.name as category_name
+                                   FROM game g
+                                   join category c
+                                        on c.id = g.category_id
+                                   where g.id = :id", ['id' => $id]);
+        return reset($response);                           
+    }
    
 }
 ?>

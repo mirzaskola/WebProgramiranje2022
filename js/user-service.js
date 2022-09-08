@@ -1,7 +1,7 @@
 var UserService = {
     init: function(){
       var token = localStorage.getItem("token");
-      if (token){
+      if (token && !window.location.pathname.includes("admin-panel")){
         window.location.replace("index.html");
       }
       $('#login-form').validate({
@@ -16,6 +16,21 @@ var UserService = {
           UserService.signup(entity);
         }
       });
+      
+      $('#addUserForm').validate({
+        submitHandler: function(form) {
+          var entity = Object.fromEntries((new FormData(form)).entries());
+          UserService.add(entity);
+        }
+      });
+      
+      $('#editUserForm').validate({
+        submitHandler: function(form) {
+          var entity = Object.fromEntries((new FormData(form)).entries());
+          UserService.update(entity);
+        }
+      });
+    
     },
     login: function(entity){
       $.ajax({

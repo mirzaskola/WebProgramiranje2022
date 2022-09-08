@@ -122,40 +122,50 @@
     
     <!-- ViewGameDetailsModal -->
     <div class="modal fade" id="viewGameDetailsModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog  modal-lg">
-          <div class="modal-content" style="color: black;">
-            <form id="editGameForm">
-                      
-              <div class="modal-header " id="game_title">
-                
-              </div>
-              <div class="modal-body">
-                <input type="hidden" name="id" />
-                <div class="form-group">
-  
-                  <div class="input-group mb-3">
-                    <span class="input-group-text w-25 fs-6" id="game-name-addon">Name</span>
-                    <input name="name" type="text" class="form-control required" minlength="6" placeholder="Name" aria-describedby="game-name-addon">
-                  </div>
-  
-                  <div class="input-group mb-3 ">
-                    <span class="input-group-text w-25 fs-6" id="category-id-addon">Category</span>
-                    <input name="category_id" type="text" class="form-control required" minlength="1" placeholder="Category" aria-describedby="category-id-addon">
-                  </div>
-                  <div class="input-group mb-3 fs-6">
-                    <span class="input-group-text w-25" id="description-addon">Description</span>
-                    <textarea name="description" type="text" class="form-control required" maxlength="240" placeholder="Description" aria-describedby="description-addon"></textarea>
-                  </div>
+      <div class="modal-dialog  modal-lg">
+        <div class="modal-content" style="color: black;">
+          <form id="editGameForm">
+                    
+            <div class="modal-header " id="game_title">
+              
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="id" />
+              <div class="form-group">
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25 fs-6" id="game-name-addon">Name</span>
+                  <input name="name" type="text" class="form-control required" minlength="6" placeholder="Name" aria-describedby="game-name-addon">
+                </div>
+
+                <div class="input-group mb-3 ">
+                  <span class="input-group-text w-25 fs-6" id="category-id-addon">Category</span>
+                  <input name="category_id" type="text" class="form-control required" minlength="1" placeholder="Category" aria-describedby="category-id-addon">
+                </div>
+                <div class="input-group mb-3 fs-6">
+                  <span class="input-group-text w-25" id="description-addon">Description</span>
+                  <textarea name="description" type="text" class="form-control required" maxlength="240" placeholder="Description" aria-describedby="description-addon"></textarea>
                 </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" onclick="GameService.redirect_to_login();">Leave review</button>
-              </div>
-              
-            </form>           
-          </div>
+              <!-- User activities start stajao je mt-5--> 
+                <div class="container-fluid" id="user-activities" style="color: black;">
+                  <div class="my-3 p-3 bg-body rounded shadow-sm" id="review-list">
+                      
+                      <small>
+                      <a href="#">All updates</a>
+                      </small>
+                  </div>
+                </div>
+              <!-- User activities end-->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" onclick="GameService.redirect_to_login();">Leave review</button>
+            </div>
+            
+          </form>           
         </div>
       </div>
+    </div>
 
       <!--ModalReview start-->
       <div class="modal fade" id="ModalReview" aria-hidden="true" tabindex="-1">

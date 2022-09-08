@@ -1,5 +1,17 @@
 <?php
 
+// get all reviews
+Flight::route('GET /reviews', function(){
+    $data = Flight::ratingService()->get_all();
+    Flight::json($data);
+});
+
+//get one review for game
+Flight::route('GET /reviews/@id', function($id){
+    $data = Flight::ratingService()->get_reviews_by_game_id($id);
+    Flight::json($data);
+});
+
 // Leave a review
 Flight::route('POST /review', function(){
     $request = Flight::request();

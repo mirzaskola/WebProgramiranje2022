@@ -520,22 +520,7 @@
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         } 
     </script>
-    <script>
-      $('#addUserForm').validate({
-        submitHandler: function(form) {
-          var entity = Object.fromEntries((new FormData(form)).entries());
-          UserService.add(entity);
-        }
-      });
-    </script>
-    <script>
-      $('#editUserForm').validate({
-        submitHandler: function(form) {
-          var entity = Object.fromEntries((new FormData(form)).entries());
-          UserService.update(entity);
-        }
-      });
-    </script>
+    
     <!-- <script>
       $('#editOfferForm').validate({
         submitHandler: function(form) {
@@ -551,6 +536,7 @@
         OfferService.init();
         OfferService.get_all_offers_admin();
         UserService.get_all_users_admin();
+        UserService.init();
     </script>
 
 </html>

@@ -18,6 +18,8 @@ class GameService extends BaseService{
     public function get_all_games_by_name(){
         return $this->dao->get_all_games_by_name();
     }
-    
+    public function get_by_id_with_category($id){
+        return $this->dao->get_by_id_with_category($id);
+    }
 }
 ?>

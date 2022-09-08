@@ -32,6 +32,7 @@ Flight::route('POST /users', function(){
 Flight::route('PUT /users/@id', function($id){
     $request = Flight::request();
     $data = $request->data->getData();
+    $data['password'] = md5($data['password']);
     // Flight::dao()->update($id, $data['user_name'], $data['user_mail'], $data['user_password']);
     // $data['id'] = $id;
     Flight::userService()->update($id, $data);

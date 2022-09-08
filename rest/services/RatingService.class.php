@@ -21,6 +21,8 @@ class RatingService extends BaseService{
         return $sabrani_rejtinzi / 5;
     
     } 
-
+    public function get_reviews_by_game_id($game_id){
+        return $this->dao->get_reviews_by_game_id($game_id); 
+    }
 }
 ?>
