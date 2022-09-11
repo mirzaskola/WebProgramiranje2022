@@ -10,9 +10,18 @@ Flight::route('GET /users', function(){
     Flight::json($data);
 });
 
-//get one user for admin
+// get one user for admin
 Flight::route('GET /users/@id', function($id){
     $data = Flight::userService()->get_by_id($id);
+    unset($data['password']);
+    Flight::json($data);
+});
+
+// get my profile info
+Flight::route('GET /myprofile', function(){
+    $user = Flight::get('user');
+    $data = Flight::userService()->get_by_id($user['id']);
+    unset($data['password']);
     Flight::json($data);
 });
 

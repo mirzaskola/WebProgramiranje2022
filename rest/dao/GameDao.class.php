@@ -27,7 +27,7 @@ class GameDao extends BaseDao{
             );
     }
     public function get_by_id_with_category($id){
-        $response = $this->query("SELECT g.id as id, g.name as name, g.description as description, c.name as category_name
+        $response = $this->query("SELECT g.id as id, g.name as name, g.image as image, g.icon as icon, g.description as description, c.name as category_name, c.id as category_id 
                                    FROM game g
                                    join category c
                                         on c.id = g.category_id

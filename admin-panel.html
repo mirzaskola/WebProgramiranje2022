@@ -121,6 +121,22 @@
             </div>
             <!-- Games dashboard end-->
 
+            <!-- Category dashboard start-->
+            <div class="container-fluid mt-5 justify-content-center table-responsive my-3 p-3 rounded shadow-sm">          
+                <table class="table table-striped table-hover caption-top d-table">
+                  <caption>List of all categories</caption>
+                    <thead>
+                      <tr>
+                        <th class="text-start" scope="col">Category ID</th>
+                        <th class="text-start" scope="col">Category name</th>
+                        <th class="text-start" scope="col">Actions</th>                        
+                      </tr>
+                    </thead>
+                    <tbody id="category-dashboard"></tbody>
+                </table>
+            </div>
+            <!-- Category dashboard end-->
+
             <!-- Offers dashboard start-->           
             <div class="container-fluid mt-5 justify-content-center table-responsive my-3 p-3 rounded shadow-sm" >          
                 <table class="table table-striped table-hover caption-top  d-table">
@@ -487,6 +503,62 @@
       </div>
     </div>
 
+    <!-- AddNewCategoryModal -->
+    <div class="modal fade" id="addNewCategoryModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog  modal-lg">
+        <div class="modal-content" style="color: black;">
+          <form id="addCategoryForm">         
+            <div class="modal-header">
+              <p class="modal-title fs-4">Add category</p>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="category-name-addon">Category name</span>
+                  <input name="name" type="text" class="form-control required" placeholder="Category name" aria-describedby="category-name-addon">
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary save-changes-button">Save changes</button>
+            </div>
+          </form>           
+        </div>
+      </div>
+    </div>
+
+    <!-- EditCategoryModal -->
+    <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog  modal-lg">
+        <div class="modal-content" style="color: black;">
+          <form id="editCategoryForm">         
+            <div class="modal-header">
+              <p class="modal-title fs-4">Add category</p>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="id" />
+                <div class="form-group">
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="category-name-addon">Category name</span>
+                  <input name="name" type="text" class="form-control required" placeholder="Category name" aria-describedby="category-name-addon">
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary save-changes-button">Save changes</button>
+            </div>
+          </form>           
+        </div>
+      </div>
+    </div>
     
 
     <script src="js/jquery-3.6.0.min.js"></script>    
@@ -495,6 +567,7 @@
     <script src="js/game-service.js"></script>
     <script src="js/offer-service.js"></script>
     <script src="js/user-service.js"></script>
+    <script src="js/category-service.js"></script>
     <script> 
       $(function(){        
         $("#footer").load("pages/footer.html"); 
@@ -537,6 +610,8 @@
         OfferService.get_all_offers_admin();
         UserService.get_all_users_admin();
         UserService.init();
+        CategoryService.get_all_categories_admin();
+        CategoryService.init();
     </script>
 
 </html>

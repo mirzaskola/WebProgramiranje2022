@@ -147,10 +147,10 @@ var GameService = {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               `);
 
-                $('#editGameForm input[name="id"]').val(data.id);
-                $('#editGameForm input[name="name"]').val(data.name);
-                $('#editGameForm input[name="category_id"]').val(data.category_name);
-                $('#editGameForm textarea[name="description"]').val(data.description);
+                $('#viewGameDetailsForm input[name="id"]').val(data.id);
+                $('#viewGameDetailsForm input[name="name"]').val(data.name);
+                $('#viewGameDetailsForm input[name="category_name"]').val(data.category_name);
+                $('#viewGameDetailsForm textarea[name="description"]').val(data.description);
 
 
                 $("#review-modal").html("");
@@ -292,7 +292,7 @@ var GameService = {
             type: 'GET',
             success: function (data) {
                 $("#review-list").html("");
-                var html = `<h6 class="border-bottom pb-2 mb-0">Reviews</h6> `;
+                var html = `<h5 class="border-bottom pb-2 mb-0">Reviews</h5> `;
                 if (data.length < 1) {
                     html = ``;
                     html += `<h2 class="text-center">No reviews for this title</h2>`;
@@ -304,7 +304,8 @@ var GameService = {
                             <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
                     
                             <p class="pb-3 mb-0 small lh-sm border-bottom">
-                                <strong class="d-block text-gray-dark">@`+ data[i].username +`</strong>
+                                <span class="d-block"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100</span>
+                                
                                 `+ data[i].comment +`
                             </p>
                         </div>
@@ -316,7 +317,7 @@ var GameService = {
             }
         });
     },
-
+    
 
     /*###### ADMIN PANEL #####*/
     get_all_games_admin: function () {
@@ -367,7 +368,7 @@ var GameService = {
             success: function (data) {
                 $('#editGameForm input[name="id"]').val(data.id);
                 $('#editGameForm input[name="name"]').val(data.name);
-                $('#editGameForm input[name="category_id"]').val(data.category_id);
+                $('#editGameForm input[name="category_id"]').val(data.category_name);
                 $('#editGameForm input[name="image"]').val(data.image);
                 $('#editGameForm input[name="icon"]').val(data.icon);
                 $('#editGameForm textarea[name="description"]').val(data.description);
@@ -437,6 +438,7 @@ var GameService = {
             success: function () {
                 $(".delete-game-button").attr('disabled', false);
                 $("#game-list").html("");
+                $("#games-dashboard").html("");
 
                 GameService.get_all_games_admin();
             }
