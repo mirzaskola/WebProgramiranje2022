@@ -32,7 +32,7 @@ Flight::route('/*', function(){
     //perform JWT decode
     $path = Flight::request()->url;
     $method = Flight::request()->method;
-    if ($path == '/login' || $path == '/docs.json' || $path == '/toprated' || $path == '/allnames' || $path == '/offers' || ($path == '/games' && $method == 'GET') || str_contains($path, 'games/') || $path == '/signup' || $path == '/games-search' || str_contains($path, 'reviews/')) return TRUE; // exclude login route from middleware
+    if ($path == '/login' || $path == '/docs.json' || $path == '/toprated' || $path == '/allnames' || $path == '/offers' || ($path == '/games' && $method == 'GET') || str_contains($path, 'games/') || $path == '/signup' || $path == '/games-search' || str_contains($path, 'reviews/') ) return TRUE; // exclude login route from middleware
   
     $headers = getallheaders();
     if (@!$headers['Authorization']){

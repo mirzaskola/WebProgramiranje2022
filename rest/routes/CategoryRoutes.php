@@ -7,7 +7,7 @@ Flight::route('GET /categories', function(){
     // print_r($users);
 });
 
-//get one
+// get one
 Flight::route('GET /categories/@id', function($id){
     $data = Flight::categoryService()->get_by_id($id);
     Flight::json($data);

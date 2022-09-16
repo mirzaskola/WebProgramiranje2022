@@ -7,6 +7,7 @@ use Firebase\JWT\Key;
 // get all users for admin
 Flight::route('GET /users', function(){
     $data = Flight::userService()->get_all();
+    unset($data['password']);
     Flight::json($data);
 });
 
@@ -20,11 +21,35 @@ Flight::route('GET /users/@id', function($id){
 // get my profile info
 Flight::route('GET /myprofile', function(){
     $user = Flight::get('user');
-    $data = Flight::userService()->get_by_id($user['id']);
-    unset($data['password']);
+    if (isset($user['id'])){
+        $data = Flight::userService()->get_by_id($user['id']);
+        unset($data['password']);
+        Flight::json($data);
+    }
+    // sta se ovdje desi? gdje se returna, gdje da redirectam?
+    else{
+        Flight::json(FALSE);
+    }
+});
+
+// update for my profile
+Flight::route('PUT /myprofile/@id', function($id){
+    $request = Flight::request();
+    $data = $request->data->getData();
+    Flight::userService()->update($id, $data);
     Flight::json($data);
 });
 
+// update password for my profile
+Flight::route('PUT /changepassword/@id', function($id){
+    $request = Flight::request();
+    $data = $request->data->getData();
+    $data['password'] = md5($data['password']);
+    unset($data['newpassword']);
+    Flight::userService()->update($id, $data);
+    unset($data['password']);
+    Flight::json($data);
+});
 
 // insert from admin panel
 Flight::route('POST /users', function(){
@@ -41,10 +66,10 @@ Flight::route('POST /users', function(){
 Flight::route('PUT /users/@id', function($id){
     $request = Flight::request();
     $data = $request->data->getData();
-    $data['password'] = md5($data['password']);
+    // $data['password'] = md5($data['password']);
     // Flight::dao()->update($id, $data['user_name'], $data['user_mail'], $data['user_password']);
     // $data['id'] = $id;
-    Flight::userService()->update($id, $data);
+    Flight::userService()->update_admin($id, $data);
     Flight::json($data);
 
 });
@@ -76,9 +101,14 @@ Flight::route('POST /signup', function(){
 });
 
 // Check user role
-Flight::route('GET /admin', function(){
+Flight::route('GET /checkuser', function(){
     $user = Flight::get('user');
-    Flight::json(Flight::userService()->check_user_role($user));
+    if (isset($user['id'])){
+        Flight::json(Flight::userService()->check_user_role($user));
+    }
+    else{
+        Flight::json("guest");
+    }
 });
 
 ?>

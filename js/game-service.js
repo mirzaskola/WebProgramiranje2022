@@ -22,6 +22,13 @@ var GameService = {
                 GameService.leave_review(review);
             }
         });
+        // $('#editReviewGameForm').validate({
+        //     submitHandler: function (form) {
+        //         var review = Object.fromEntries((new FormData(form)).entries());
+        //         console.log(review);
+        //         GameService.update_review_for_my_profile(review);
+        //     }
+        // });
         $('#editGameForm').validate({
             submitHandler: function (form) {
                 var game = Object.fromEntries((new FormData(form)).entries());
@@ -267,6 +274,14 @@ var GameService = {
         });
     },
     leave_review: function (review) {
+        review.created = ``;
+        let currentDate = new Date();
+        let day = currentDate.getDate();
+        let month = currentDate.getMonth() + 1;
+        let year = currentDate.getFullYear();
+        let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+        review.created = `${year}-${month}-${day} ${time}`;
+
         $.ajax({
             url: 'rest/review',
             type: 'POST',
@@ -304,7 +319,7 @@ var GameService = {
                             <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
                     
                             <p class="pb-3 mb-0 small lh-sm border-bottom">
-                                <span class="d-block"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100</span>
+                                <span class="d-block"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100 <span><i>Posted on: `+ data[i].created +`</i></span></span>
                                 
                                 `+ data[i].comment +`
                             </p>
@@ -317,7 +332,136 @@ var GameService = {
             }
         });
     },
-    
+    get_reviews_for_my_profile: function(){
+        $.ajax({
+            url: 'rest/mojirivjui',
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                $("#my-reviews").html("");
+                var html = ``;
+                if (data.length < 1) {
+                    html = ``;
+                    html += `<h2 class="text-center">No reviews for this title</h2>`;
+                }
+                for (let i = 0; i < data.length; i++) {
+                    html += `
+                        <!-- single review start -->
+                        <tr>
+                            <td class="text-start">
+                                <div class="d-flex text-muted pt-3">
+                                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                        
+                                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                                    <span class="d-block text-truncate"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100 <span><i>Posted on: `+ data[i].created +` </i></span></span>
+                                    
+                                    `+ data[i].comment +`
+                                </p>
+                                </div>
+                            </td>
+                            <td class="text-start">`+ data[i].name +`</td>
+                            <td class="text-start">
+                            <button class="btn btn-outline-warning btn-sm edit-review-button" onclick="GameService.get_one_review_for_my_profile(`+ data[i].review_id + `)">
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                     </svg>
+                            </button>
+                                            
+                             <button class="btn btn-outline-danger btn-sm delete-review-button" onclick="GameService.delete_review_for_my_profile(`+ data[i].review_id + `)">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                 </svg>
+                             </button>
+                             </td>
+                        
+                        <tr>
+                        <!-- single review end -->
+                        `;
+
+                }
+                $("#my-reviews").html(html);
+            }
+        });
+    },
+    get_one_review_for_my_profile: function(id){
+        $(".edit-review-button").attr('disabled', true);
+        $.ajax({
+            url: 'rest/mojirivjui/'+id,
+            type: "GET",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                $("#game_title").html("");
+                $("#game_title").html(`
+                <p class=" modal-title fs-4"> Details about ` + data.name + ` </p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              `);
+                $('#editReviewGameForm input[name="id"]').val(data.id);
+                $('#editReviewGameForm input[name="game_id"]').val(data.game_id);
+                $('#editReviewGameForm input[name="gameplay_rating"]').val(data.gameplay_rating);
+                $('#editReviewGameForm input[name="performance_rating"]').val(data.performance_rating);
+                $('#editReviewGameForm input[name="audio_rating"]').val(data.audio_rating);
+                $('#editReviewGameForm input[name="satisfaction_rating"]').val(data.satisfaction_rating);
+                $('#editReviewGameForm textarea[name="comment"]').val(data.comment);
+
+
+                $("#review-modal").html("");
+                $("#review-modal").html(`<p class="fs-4"> Leave a review for ` + data.name + ` </p>`);
+                
+                $("#ModalReview").modal('show');
+                $("#viewYourReviewsModal").modal('hide');
+                $(".edit-review-button").attr('disabled', false);
+
+                GameService.get_reviews_for_my_profile();
+            }
+        });
+    },
+    update_review_for_my_profile: function(){
+        $(".save-changes-button").attr('disabled', true);
+
+        var review = {
+              id: $('#editReviewGameForm input[name="id"]').val(),
+              game_id: $('#editReviewGameForm input[name="game_id"]').val(),
+              gameplay_rating: $('#editReviewGameForm input[name="gameplay_rating"]').val(),
+              performance_rating: $('#editReviewGameForm input[name="performance_rating"]').val(),
+              audio_rating: $('#editReviewGameForm input[name="audio_rating"]').val(),
+              satisfaction_rating: $('#editReviewGameForm input[name="satisfaction_rating"]').val(), 
+              comment: $('#editReviewGameForm textarea[name="comment"]').val() 
+            };
+
+        $.ajax({
+            url: 'rest/mojirivjui/'+$('#editReviewGameForm input[name="id"]').val(),
+            type: 'PUT',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            data: JSON.stringify(review),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (result) {
+                $("#ModalReview").modal("hide");
+                $(".save-changes-button").attr('disabled', false);
+                GameService.get_reviews_for_my_profile();
+            }
+        });
+    },
+    delete_review_for_my_profile: function (id) {
+        $(".delete-review-button").attr('disabled', true);
+        $.ajax({
+            url: 'rest/deletemojirivjui/' + id,
+            type: 'DELETE',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function () {
+                $(".delete-review-button").attr('disabled', false);
+                GameService.get_reviews_for_my_profile();
+            }
+        });
+    },
 
     /*###### ADMIN PANEL #####*/
     get_all_games_admin: function () {
@@ -368,7 +512,7 @@ var GameService = {
             success: function (data) {
                 $('#editGameForm input[name="id"]').val(data.id);
                 $('#editGameForm input[name="name"]').val(data.name);
-                $('#editGameForm input[name="category_id"]').val(data.category_name);
+                $('#editGameForm input[name="category_id"]').val(data.category_id);
                 $('#editGameForm input[name="image"]').val(data.image);
                 $('#editGameForm input[name="icon"]').val(data.icon);
                 $('#editGameForm textarea[name="description"]').val(data.description);
@@ -445,6 +589,92 @@ var GameService = {
         });
     },
 
+    get_all_reviews_admin: function(){
+        $.ajax({
+            url: 'rest/reviews',
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                $("#all-reviews").html("");
+                var html = ``;
+                if (data.length < 1) {
+                    html = ``;
+                    html += `<h2 class="text-center">No reviews</h2>`;
+                }
+                for (let i = 0; i < data.length; i++) {
+                    html += `
+                        <!-- single review start -->
+                        <tr>
+                            <td class="text-start">
+                                <div class="d-flex text-muted pt-3">
+                                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                        
+                                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                                    <span class="d-block text-truncate"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100 <span><i>Posted on: `+ data[i].created +` </i></span></span>
+                                    
+                                    `+ data[i].comment +`
+                                </p>
+                                </div>
+                            </td>
+                            <td class="text-start">`+ data[i].name +`</td>
+                            <td class="text-start">
+                            
+                                            
+                             <button class="btn btn-outline-danger btn-sm delete-review-button" onclick="GameService.delete_review_for_my_profile(`+ data[i].review_id + `)">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                 </svg>
+                             </button>
+                             </td>
+                        
+                        <tr>
+                        <!-- single review end -->
+                        `;
+
+                }
+                $("#all-reviews").html(html);
+            }
+        });
+    },    
+    get_recent_user_activities: function(){
+        $.ajax({
+            url: 'rest/recentactivities',
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                $("#recent-user-activities").html("");
+                var html = ``;
+                if (data.length < 1) {
+                    html = ``;
+                    html += `<h2 class="text-center">No reviews</h2>`;
+                }
+                for (let i = 0; i < data.length; i++) {
+                    html += `
+                        <!-- single review start -->
+
+                                <div class="d-flex text-muted pt-3">
+                                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                        
+                                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                                    <span class="d-block text-truncate"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100 <span><i>Posted on: `+ data[i].created +` </i></span></span>
+                                    
+                                    `+ data[i].comment +`
+                                </p>
+                                </div>
+ 
+                        <!-- single review end -->
+                        `;
+
+                }
+                $("#recent-user-activities").html(html);
+            }
+        });
+    },    
+    // outdated
     get_comments: function (id) {
         $.get('rest/comments/' + id, function (data) {
             var html = "";

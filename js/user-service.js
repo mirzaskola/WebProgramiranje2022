@@ -1,9 +1,6 @@
 var UserService = {
     init: function(){
-      var token = localStorage.getItem("token");
-      if (token && !window.location.pathname.includes("admin-panel") && !window.location.pathname.includes("profile")){
-        window.location.replace("index.html");
-      }
+      
       $('#login-form').validate({
         submitHandler: function(form) {
           var entity = Object.fromEntries((new FormData(form)).entries());
@@ -35,6 +32,19 @@ var UserService = {
           var entity = Object.fromEntries((new FormData(form)).entries());
           UserService.update_my_profile(entity);
         }
+      });
+      $('#changePasswordForm').validate({
+        rules: {
+          newpassword: "required",
+          password: {
+            equalTo: "#newpassword"
+          }
+        },
+        submitHandler: function(form) {
+          var entity = Object.fromEntries((new FormData(form)).entries());
+          UserService.update_password_my_profile(entity);
+        }
+
       });
     
     },
@@ -76,27 +86,62 @@ var UserService = {
         }
       });
     },
-    check_user_role: function(){
+    check_user_role: function(current_url){
       $.ajax({
-        url: 'rest/admin',
+        url: 'rest/checkuser',
         type: 'GET',
         beforeSend: function(xhr){
           xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
         },
         success: function(result) {
-          if(result == true){
+          // User is registered or admin and goes to my profile
+          if((result == "admin" || result == "user") && current_url.includes("profile")){
+            window.location.replace("my-profile.html");
+          }
+          // User is unregistered and wants to visit my profile
+          if((result == "guest") && current_url.includes("profile")){
+            window.location.replace("login.html");
+          }
+          // User is admin and accesses admin panel
+          if(result == "admin" && current_url.includes("admin")){
             window.location.replace("admin-panel.html");
           }
-          else{
-            window.location.replace("403-page.html");
+          // User is registered or unregistered and wants to access admin panel
+          if(result == "guest" && current_url.includes("admin")){
+            window.location.replace("login.html");
           }
+          if(result == "user" && current_url.includes("admin")){
+            window.location.replace("index.html");
+          }
+          // User is registered or admin and wants to leave a review
+
+          // User is unregistered and wants to leave a review
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-          toastr.error(XMLHttpRequest.responseJSON.message);
+          window.location.replace("login.html");
         }
       });
     },
-
+    // validate_user: function(result){
+    //   $.ajax({
+    //     url: 'rest/validateuser',
+    //     type: 'GET',
+    //     beforeSend: function(xhr){
+    //       xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+    //     },
+    //     success: function(result) {
+    //       if(result == true){
+    //         UserService.init();
+    //       }
+    //       else{
+    //         window.location.replace("login.html");
+    //       }
+    //     },
+    //     error: function(XMLHttpRequest, textStatus, errorThrown) {
+    //       toastr.error(XMLHttpRequest.responseJSON.message);
+    //     }
+    //   });
+    // },
     logout: function(){
       localStorage.clear();
       window.location.replace("login.html");
@@ -181,7 +226,7 @@ var UserService = {
                                           <h6 class="mb-0">Password</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                          <strong><a data-bs-toggle="modal" data-bs-target="#editProfileModal" role=button>Change password<a></strong>
+                                          <strong><a data-bs-toggle="modal" data-bs-target="#changePasswordModal" role=button>Change password<a></strong>
                                         </div>
                                       </div>
                                       <hr>
@@ -189,6 +234,7 @@ var UserService = {
                                       <div class="row">
                                         <div class="col-sm-12">
                                           <a class="btn btn-primary edit-user-button" data-bs-toggle="modal" data-bs-target="#editProfileModal" href="">Edit profile</a>
+                                          <a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#viewYourReviewsModal" href="">View your reviews</a>
                                         </div>
                                       </div>
                                     </div>
@@ -200,7 +246,7 @@ var UserService = {
             $('#editProfileForm input[name="user_role"]').val(data.user_role);
             $('#editProfileForm input[name="username"]').val(data.username);
             $('#editProfileForm input[name="email"]').val(data.email);
-            
+            $('#changePasswordForm input[name="id"]').val(data.id);
 
     
             $(".edit-user-button").attr('disabled', false);
@@ -209,33 +255,45 @@ var UserService = {
       });
     },
     update_my_profile: function(entity){
-
       $(".save-changes-button").attr('disabled', true);
-  
-      // var user = {
-      //       id: $('#editUserForm input[name="id"]').val(),
-      //       username: $('#editUserForm input[name="username"]').val(),
-      //       email: $('#editUserForm input[name="email"]').val(),
-      //       password: $('#editUserForm input[name="password"]').val(),
-      //       user_role: $('#editUserForm input[name="user_role"]').val(),
-      //     };
-         
+
       $.ajax({
-          url: 'rest/users/'+$('#editProfileForm input[name="id"]').val(),
-          type: 'PUT',
-          beforeSend: function(xhr){
-            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-          },
-          data: JSON.stringify(entity),
-          dataType: 'json',
-          contentType: 'application/json',
-          success: function (result) {
-              $("#editProfileModal").modal("hide");
-              $(".save-changes-button").attr('disabled', false);
-              $("#profile-content").html("");
-  
-              UserService.get_my_profile_info();
-          }
+        url: 'rest/myprofile/'+$('#editProfileForm input[name="id"]').val(),
+        type: 'PUT',
+        beforeSend: function(xhr){
+          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
+        data: JSON.stringify(entity),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (result) {
+            $("#editProfileModal").modal("hide");
+            $(".save-changes-button").attr('disabled', false);
+            $("#profile-content").html("");
+
+            UserService.get_my_profile_info();
+        }
+      });
+    },
+    update_password_my_profile: function(entity){
+      $(".save-changes-button").attr('disabled', true);
+
+      $.ajax({
+        url: 'rest/changepassword/'+$('#changePasswordForm input[name="id"]').val(),
+        type: 'PUT',
+        beforeSend: function(xhr){
+          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
+        data: JSON.stringify(entity),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (result) {
+            $("#changePasswordModal").modal("hide");
+            $(".save-changes-button").attr('disabled', false);
+            $("#profile-content").html("");
+
+            UserService.get_my_profile_info();
+        }
       });
     },
 
@@ -256,7 +314,7 @@ var UserService = {
                       <td class="text-start">`+data[i].id+`</td>
                       <td class="text-start">`+data[i].username+`</td>
                       <td class="text-start">`+data[i].email+`</td>                         
-                      <td class="text-start">`+data[i].password+`</td>                         
+                      <!-- <td class="text-start">`+data[i].password+`</td> -->                        
                       <td class="text-start">`+data[i].user_role+`</td>                         
                       <td class="text-start" scope="row">
                           <button class="btn btn-outline-warning btn-sm edit-user-button" onClick="UserService.get_admin(`+data[i].id+`)">
@@ -308,7 +366,7 @@ var UserService = {
           $('#editUserForm input[name="id"]').val(data.id);
           $('#editUserForm input[name="username"]').val(data.username);
           $('#editUserForm input[name="email"]').val(data.email);
-          $('#editUserForm input[name="password"]').val(data.password);
+          // $('#editUserForm input[name="password"]').val(data.password);
           $('#editUserForm input[name="user_role"]').val(data.user_role);
   
           $(".edit-user-button").attr('disabled', false);

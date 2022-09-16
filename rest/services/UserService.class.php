@@ -31,12 +31,23 @@ class UserService extends BaseService{
     }
     public function check_user_role($user){
         $user_from_db = $this->dao->get_user_by_email($user['email']);
-        if($user_from_db['user_role'] == 1){
-            return TRUE;
+        if (isset($user_from_db['id'])){
+            if($user_from_db['user_role'] == 1){
+                return "admin";
+            }
+            if($user_from_db['user_role'] == 0){
+                return "user";
+            }
         }
         else{
-            return FALSE;
+            return "guest";
         }
+        
+    }
+    public function update_admin($id, $data){
+        $user_from_db = $this->dao->get_by_id($id);
+        $data['password'] = $user_from_db['password'];
+        $this->dao->update($id, $data);
     }
 }
 

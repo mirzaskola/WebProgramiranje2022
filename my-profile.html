@@ -18,10 +18,9 @@
 
         <style>
             body{
-                margin-top:20px;
                 color: #1a202c;
                 text-align: left;
-                background-color: #e2e8f0;    
+                  
             }
             .main-body {
                 padding: 15px;
@@ -75,15 +74,51 @@
     </head>
 
     <body>  
-        <div id="header"></div>
+        <!-- Navbar start-->
+        <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navbar" style="background-color: black;">
+          <div class="container-fluid">
+              <a class="navbar-brand" href="index.html" style="margin-right: 20px;">
+                  <img src="favicon.ico" alt="Blog logo" class="d-inline-block align-text-top">
+              </a>
+          <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="navbar-collapse collapse" id="navbarsExample05">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="index.html" style="color: #fff; margin-right: 20px;">Home</a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a class="nav-link" href="all-games.html" style="color: #fff; margin-right: 20px;">All games</a>
+                  </li>
+          
+                  <li class="nav-item">
+                      <a class="nav-link" href="#about-us" style="color: #fff; margin-right: 20px;">About us</a>
+                  </li>
+              </ul>
+
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 180px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#fff" class="bi bi-person" viewBox="0 0 16 16">
+                      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                    </svg>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-lg-end" style="font-size: 12px;">
+                  <li><a class="dropdown-item" href="index.html">Back to homepage</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" onclick="UserService.logout()">Log out</a></li>
+                </ul>
+            </div>
+          </div>
+          </div>
+        </nav>
         <main>
             <!--Profile data start -->
             <div class="most-popular" id="s2">
                 <div class="container">
-                    <div class="main-body" id="profile-content" style="background-color: #0A0A0A; border-radius: 25px;">
-                    
-                          
-                    
+                    <div class="main-body" id="profile-content" style="background-color: #0A0A0A; border-radius: 25px;">                
                           <div class="row gutters-sm">
                             <div class="col-md-4 mb-3">
                               <div class="card">
@@ -165,10 +200,9 @@
                               </div>
                             </div>
                           </div>
-                
-                        </div>
-                    </div>
-                
+
+                    </div>           
+                </div>    
             </div>  
             <!-- Profile data end -->
             <div id="about" style="background-color: #0A0A0A;"></div>
@@ -183,7 +217,7 @@
 
     <script> 
         $(function(){
-          $("#header").load("pages/header.html");
+          // $("#header").load("pages/header.html");
           $("#about").load("pages/about-us.html");
           $("#footer").load("pages/footer.html");
         });
@@ -213,10 +247,6 @@
                     <input name="email" type="text" class="form-control required" minlength="1" placeholder="Email" aria-describedby="email-addon">
                   </div>
   
-                  <div class="input-group mb-3">
-                    <span class="input-group-text w-25" id="password-addon">Password</span>
-                    <input name="password" type="text" class="form-control required" placeholder="Enter new password" aria-describedby="password-addon">
-                  </div>
                 </div>
               </div>
               <div class="modal-footer">
@@ -228,17 +258,141 @@
         </div>
       </div>
 
+    <!-- changePasswordModal -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog  modal-lg">
+        <div class="modal-content" style="color: black;">
+          <form id="changePasswordForm">         
+            <div class="modal-header">
+              <p class="modal-title fs-4">Edit password</p>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="id" />
+              <div class="form-group">
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="new-password-addon">New password</span>
+                  <input name="newpassword" id="newpassword" type="text" class="form-control required" placeholder="Enter new password" aria-describedby="new-password-addon">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text w-25" id="confirm-password-addon">Confirm password</span>
+                  <input name="password" id="password" type="text" class="form-control required" placeholder="Confirm new password" aria-describedby="confirm-password-addon">
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary save-changes-button">Save changes</button>
+            </div>
+          </form>           
+        </div>
+      </div>
+    </div>
+
+    <!-- viewYourReviewsModal -->
+    <div class="modal fade" id="viewYourReviewsModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog  modal-lg">
+        <div class="modal-content" style="color: black;">       
+            <div class="modal-header">
+              <h4 class="modal-title" id="exampleModalLabel">Your reviews</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- User activities start stajao je mt-5--> 
+                <div class="container-fluid" id="user-activities" style="color: black;">
+                  <div class="bg-body rounded shadow-sm">
+                     <!-- Games dashboard start-->
+                      <div class="container-fluid justify-content-center table-responsive my-3 p-3 rounded shadow-sm">          
+                        <table class="table table-striped table-hover caption-top d-table">
+                            <thead>
+                              <tr>
+                                <th class="text-start" scope="col">Reviews</th>
+                                <th class="text-start" scope="col">Game</th>
+                                <th class="text-start" scope="col">Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody id="my-reviews">
+
+                            </tbody>
+                        </table>
+                    </div>
+                     <!-- Games dashboard end--> 
+                      
+                  </div>
+                </div>
+              <!-- User activities end-->
+            </div>
+            <div class="modal-footer">
+            </div>          
+        </div>
+      </div>
+    </div>
+
+    <!--ModalReview start-->
+    <div class="modal fade" id="ModalReview" aria-hidden="true" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"  style="color: black;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="review-modal" style="color: black;">Leave a review</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form id="editReviewGameForm">
+                  <div class="mb-3" id="gameTitle"></div>
+
+                  <div class="input-group mb-3">
+                    <input name="id" id="id" type="text">
+                    <input name="game_id" id="game_id" type="text">
+                  </div>
+                  
+                  <div class="input-group mb-3">
+                    <label for="gameplayRange" class="form-label"><img src="img/001-sad.png" alt="">Gameplay</label>
+                    <input name="gameplay_rating"  type="range" class="form-range" min="0" max="100" step="10" id="gameplayRange">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <label for="performanceRange" class="form-label"><img src="img/002-growth.png" alt=""> Performance</label>
+                    <input name="performance_rating"  type="range" class="form-range" min="0" max="100" step="10" id="performanceRange">
+                  </div>
+                  
+                  <div class="d-flex mb-3">
+                      <label for="graphicsRange" class="form-label"><img src="img/003-graphic-design.png" alt=""> Graphics</label>
+                      <input name="graphics_rating"  type="range" class="form-range" min="0" max="100" step="10" id="graphicsRange">
+                  </div>
+                  <div class="d-flex mb-3">
+                      <label for="audioRange" class="form-label"><img src="img/004-headphone.png" alt=""> Audio</label>
+                      <input name="audio_rating"  type="range" class="form-range" min="0" max="100" step="10" id="audioRange">
+                  </div>
+                  <div class="d-flex mb-3">
+                      <label for="satisfactionRange" class="form-label"><img src="img/005-satisfaction.png" alt=""> Satisfaction</label>
+                      <input name="satisfaction_rating"  type="range" class="form-range" min="0" max="100" step="10" id="satisfactionRange">
+                  </div>
+                  <div class="d-flex mb-3">
+                      <label for="reviewComment" class="form-label">Comments (Optional)</label>
+                      <textarea name="comment"  class="form-control" aria-label="Comments (Optional)" id="reviewComment"></textarea>
+                    </div>
+                  <button class="btn btn-primary save-changes-button" type="submit" onclick="GameService.update_review_for_my_profile();">Submit</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--ModalReview end-->
+
 
     <script>
-      UserService.init();
-      UserService.get_my_profile_info();
     </script>
-  <!-- <script>
-      var token = localStorage.getItem("token");
-        if (token){
-          GameService.get_highest_rated();
-        }else{
-          window.location.replace("login.html");
-        }
-  </script> -->
+    <script>
+        var token = localStorage.getItem("token");
+          if (token){
+            UserService.init();
+            UserService.get_my_profile_info();
+            GameService.get_reviews_for_my_profile();
+          }else{
+            window.location.replace("login.html");
+          }
+    </script>
 </html>
