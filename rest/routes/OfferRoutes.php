@@ -37,34 +37,7 @@ Flight::route('GET /offers/@id', function($id){
 
 
 
-/**
-* @OA\Put(
-*     path="/categories/{id}", security={{"ApiKeyAuth": {}}},
-*     description="Update offer from admin panel.",
-*     tags={"offers"},
-*     summary="Update offer from admin panel.", 
-*     @OA\Parameter(in="path", name="id", example=34, description="Offer ID"),
-*     @OA\RequestBody(description="Offer info", required=true,
-*       @OA\MediaType(mediaType="application/json",
-*    			@OA\Schema(
-*    				@OA\Property(property="link", type="string", example="link.com",	description="Link"),
-*    				@OA\Property(property="partner_name", type="integer", example="partner",	description="Partner name" ),
-*    				@OA\Property(property="price", type="string", example="1.99$",	description="Price" ),
-*    				@OA\Property(property="game_name", type="string", example="Igrica",	description="Game name" ),
-*    				@OA\Property(property="is_active", type="integer", example="0",	description="Active (0 or 1)" ),
-*          
-*        )
-*     )),
-*     @OA\Response(
-*         response=200,
-*         description="Offer has been updated"
-*     ),
-*     @OA\Response(
-*         response=500,
-*         description="Internal server error"
-*     )
-* )
-*/
+
 
 // Update from admin panel
 Flight::route('PUT /offers/@id', function($id){
