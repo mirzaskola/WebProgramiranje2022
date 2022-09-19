@@ -266,7 +266,7 @@ var UserService = {
         data: JSON.stringify(entity),
         dataType: 'json',
         contentType: 'application/json',
-        success: function (result) {
+        success: function () {
             $("#editProfileModal").modal("hide");
             $(".save-changes-button").attr('disabled', false);
             $("#profile-content").html("");

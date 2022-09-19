@@ -1,0 +1,14 @@
+1. Popraviti modal za review
+2. Popraviti fontove u modalima
+3. Poigrati se s autorizacijom (pogledati zasto returna false za metode)
+4. Da li moze user drugom useru kroz konzolu updateati review?
+5. Popuniti bazu dobrim podacima
+6. Popraviti about us sekciju (Lorem ipsum)
+7. Testirati kako getati loewst rated games
+8. Provjeriti da li se metode iz admin panela mogu executati ako nisi admin ili ako nema tokena
+9. Promijeniti boju fonta za linkove u about us 
+10. Resetovati forme nakon inputa
+11. Istraziti format za vrijeme na frontendu
+12. Dodati number atribute za add offer (is_active)
+13. Dodati refresh za all reviews u admin panelu
+14. Skontati kako bootstrap funkcionise
