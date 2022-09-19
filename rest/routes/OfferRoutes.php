@@ -15,7 +15,7 @@
 // get all
 Flight::route('GET /offers', function(){
     $data = Flight::offerService()->get_all();
-    Flight::json($data);
+    Flight::json($data, 200);
     // print_r($users);
 });
 
@@ -32,7 +32,7 @@ Flight::route('GET /offers', function(){
 // get one for admin panel
 Flight::route('GET /offers/@id', function($id){
     $data = Flight::offerService()->get_by_id($id);
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 
@@ -71,7 +71,7 @@ Flight::route('PUT /offers/@id', function($id){
     $request = Flight::request();
     $data = $request->data->getData();
     Flight::offerService()->update($id, $data);
-    Flight::json(["message" => "Offer updated successfully"]);
+    Flight::json(["message" => "Offer updated successfully"], 200);
 
 });
 
@@ -109,7 +109,7 @@ Flight::route('POST /offers', function(){
     $request = Flight::request();
     $data = $request->data->getData();
     $result = Flight::offerService()->add($data);
-    Flight::json(["message" => "Offer added successfully"]);
+    Flight::json(["message" => "Offer added successfully"], 200);
 
 });
 
@@ -132,7 +132,7 @@ Flight::route('POST /offers', function(){
 // delete from admin panel
 Flight::route('DELETE /offers/@id', function($id){
     Flight::offerService()->delete($id);
-    Flight::json(["message" => "Offer deleted successfully"]);
+    Flight::json(["message" => "Offer deleted successfully"], 200);
 });
 
 ?>

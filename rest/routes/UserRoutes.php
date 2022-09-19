@@ -19,7 +19,7 @@ use Firebase\JWT\Key;
 Flight::route('GET /users', function(){
     $data = Flight::userService()->get_all();
     unset($data['password']);
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 /**
@@ -34,7 +34,7 @@ Flight::route('GET /users', function(){
 Flight::route('GET /users/@id', function($id){
     $data = Flight::userService()->get_by_id($id);
     unset($data['password']);
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 /**
@@ -50,7 +50,7 @@ Flight::route('GET /myprofile', function(){
     if (isset($user['id'])){
         $data = Flight::userService()->get_by_id($user['id']);
         unset($data['password']);
-        Flight::json($data);
+        Flight::json($data, 200);
     }
     else{
         Flight::json("User is not logged in", 403);
@@ -88,7 +88,7 @@ Flight::route('PUT /myprofile/@id', function($id){
     $request = Flight::request();
     $data = $request->data->getData();
     Flight::userService()->update($id, $data);
-    Flight::json(["message" => "Updated successfully"]);
+    Flight::json(["message" => "Updated successfully"], 200);
 });
 
 /**
@@ -124,7 +124,7 @@ Flight::route('PUT /changepassword/@id', function($id){
     unset($data['newpassword']);
     Flight::userService()->update($id, $data);
     unset($data['password']);
-    Flight::json(["message" => "Password has been updated"]);
+    Flight::json(["message" => "Password has been updated"], 200);
 });
 
 
@@ -161,7 +161,7 @@ Flight::route('POST /users', function(){
     $data['password'] = md5($data['password']);
     // Flight::dao()->add($data['user_name'], $data['user_mail'], $data['user_password']);
     $podaci = Flight::userService()->add($data);
-    Flight::json(["message" => "User has been added"]);
+    Flight::json(["message" => "User has been added"], 200);
 
 });
 
@@ -201,7 +201,7 @@ Flight::route('PUT /users/@id', function($id){
     // Flight::dao()->update($id, $data['user_name'], $data['user_mail'], $data['user_password']);
     // $data['id'] = $id;
     Flight::userService()->update_admin($id, $data);
-    Flight::json(["message" => "User info has been updated"]);
+    Flight::json(["message" => "User info has been updated"], 200);
 
 });
 
@@ -226,7 +226,7 @@ Flight::route('PUT /users/@id', function($id){
 // delete from admin panel
 Flight::route('DELETE /deleteusers/@id', function($id){
     Flight::userService()->delete($id);
-    Flight::json(["message"=>"deleted"]);
+    Flight::json(["message"=>"deleted"], 200);
 });
 
 
@@ -260,7 +260,7 @@ Flight::route('POST /login', function(){
     $login_data = Flight::request()->data->getData();
     $response = Flight::userService()->login($login_data);
     if(isset($response['token'])){
-        Flight::json($response['token']); 
+        Flight::json($response['token'], 200); 
     }
     else{
         Flight::json(["message" => $response['message']], $response['code']);
@@ -296,7 +296,7 @@ Flight::route('POST /signup', function(){
     $sign_up_data['password'] = md5($sign_up_data['password']);
     $sign_up_data['user_role'] = 0;
     Flight::userService()->add($sign_up_data);
-    Flight::json(["message" => "Signed up successfully"]);
+    Flight::json(["message" => "Signed up successfully"], 200);
 });
 
 /**
@@ -310,10 +310,10 @@ Flight::route('POST /signup', function(){
 Flight::route('GET /checkuser', function(){
     $user = Flight::get('user');
     if (isset($user['id'])){
-        Flight::json(Flight::userService()->check_user_role($user));
+        Flight::json(Flight::userService()->check_user_role($user), 200);
     }
     else{
-        Flight::json("guest");
+        Flight::json("guest", 200);
     }
 });
 

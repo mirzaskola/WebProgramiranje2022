@@ -15,7 +15,7 @@
 // Get all for admin panel
 Flight::route('GET /categories', function(){
     $data = Flight::categoryService()->get_all();
-    Flight::json($data);
+    Flight::json($data, 200);
     // print_r($users);
 });
 
@@ -31,7 +31,7 @@ Flight::route('GET /categories', function(){
 // Get one for admin panel
 Flight::route('GET /categories/@id', function($id){
     $data = Flight::categoryService()->get_by_id($id);
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 
@@ -66,7 +66,7 @@ Flight::route('PUT /categories/@id', function($id){
     $request = Flight::request();
     $data = $request->data->getData();
     Flight::categoryService()->update($id, $data);
-    Flight::json(["message" => "Category updated successfully"]);
+    Flight::json(["message" => "Category updated successfully"], 200);
 
 });
 
@@ -99,7 +99,7 @@ Flight::route('POST /categories', function(){
     $request = Flight::request();
     $data = $request->data->getData();
     $result = Flight::categoryService()->add($data);
-    Flight::json(["message" => "Category added successfully"]);
+    Flight::json(["message" => "Category added successfully"], 200);
 });
 
 
@@ -120,7 +120,7 @@ Flight::route('POST /categories', function(){
 // delete
 Flight::route('DELETE /categories/@id', function($id){
     Flight::categoryService()->delete($id);
-    Flight::json(["message" => "Category deleted successfully"]);
+    Flight::json(["message" => "Category deleted successfully"], 200);
 });
 
 ?>

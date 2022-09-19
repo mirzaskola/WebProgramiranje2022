@@ -112,7 +112,7 @@ Flight::route('PUT /games/@id', function($id){
     // Flight::dao()->update($id, $data['user_name'], $data['user_mail'], $data['user_password']);
     // $data['id'] = $id;
     Flight::gameService()->update($id, $data);
-    Flight::json(["message" => "Game updated successfully"]);
+    Flight::json(["message" => "Game updated successfully"], 200);
 
 });
 
@@ -137,7 +137,7 @@ Flight::route('PUT /games/@id', function($id){
 // delete from admin panel
 Flight::route('DELETE /deletegames/@id', function($id){
     Flight::gameService()->delete($id);
-    Flight::json(["message"=>"deleted"]);
+    Flight::json(["message"=>"deleted"], 200);
 });
 
 
@@ -157,14 +157,14 @@ Flight::route('DELETE /deletegames/@id', function($id){
 Flight::route('GET /toprated', function(){
     $data = Flight::gameService()->get_highest_rated_games();
     print_r($data);
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 // get all games name
 Flight::route('GET /allnames', function(){
     $data = Flight::gameService()->get_all_games_by_name();
     print_r($data);
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 
@@ -194,10 +194,10 @@ Flight::route('POST /games-search', function(){
     $name = $request->data->getData();
     if (strlen($name['search']) >= 1){
         $data = Flight::gameService()->get_game_by_name($name['search']);
-        Flight::json($data);
+        Flight::json($data, 200);
     }
     else{
-        Flight::json(Flight::gameService()->get_all());
+        Flight::json(Flight::gameService()->get_all(), 200);
     }
     
 });

@@ -33,7 +33,7 @@ Flight::route('GET /reviews', function(){
 // get reviews for one game
 Flight::route('GET /reviews/@id', function($id){
     $data = Flight::ratingService()->get_reviews_by_game_id($id);
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 
@@ -52,7 +52,7 @@ Flight::route('GET /reviews/@id', function($id){
 // get recent user activivites admin
 Flight::route('GET /recentactivities', function(){
     $data = Flight::ratingService()->get_recent_user_activities();
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 
@@ -72,7 +72,7 @@ Flight::route('GET /recentactivities', function(){
 Flight::route('GET /mojirivjui', function(){
     $user = Flight::get('user');
     $data = Flight::ratingService()->get_reviews_by_user_id($user['id']);
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 
@@ -89,7 +89,7 @@ Flight::route('GET /mojirivjui', function(){
 // get one review for my profile
 Flight::route('GET /mojirivjui/@id', function($id){
     $data = Flight::ratingService()->get_by_id_with_game_info($id);
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 
@@ -130,7 +130,7 @@ Flight::route('PUT /mojirivjui/@id', function($id){
     // Flight::dao()->update($id, $data['user_name'], $data['user_mail'], $data['user_password']);
     // $data['id'] = $id;
     Flight::ratingService()->update($id, $data);
-    Flight::json(["message" => "Review has been updated"]);
+    Flight::json(["message" => "Review has been updated"], 200);
 });
 
 
@@ -151,7 +151,7 @@ Flight::route('PUT /mojirivjui/@id', function($id){
 // delete review from my profile
 Flight::route('DELETE /deletemojirivjui/@id', function($id){
     Flight::ratingService()->delete($id);
-    Flight::json(["message" => "deleted"]);
+    Flight::json(["message" => "deleted"], 200);
 });
 
 
@@ -172,7 +172,7 @@ Flight::route('DELETE /deletemojirivjui/@id', function($id){
 // delete review from admin panel
 Flight::route('DELETE /deletereview/@id', function($id){
     Flight::ratingService()->delete($id);
-    Flight::json(["message" => "deleted"]);
+    Flight::json(["message" => "deleted"], 200);
 });
 
 
@@ -216,7 +216,7 @@ Flight::route('POST /review', function(){
     $data['user_id'] = $user['id'];
     // Flight::dao()->add($data['user_name'], $data['user_mail'], $data['user_password']);
     $podaci = Flight::ratingService()->add($data);
-    Flight::json(["message" => "Review posted successfully"]);
+    Flight::json(["message" => "Review posted successfully"], 200);
 });
 
 
