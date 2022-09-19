@@ -296,6 +296,7 @@ Flight::route('POST /signup', function(){
     $sign_up_data['password'] = md5($sign_up_data['password']);
     $sign_up_data['user_role'] = 0;
     Flight::userService()->add($sign_up_data);
+    Flight::json(["message" => "Signed up successfully"]);
 });
 
 /**
