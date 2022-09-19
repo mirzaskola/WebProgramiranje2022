@@ -16,7 +16,7 @@
 // get all reviews admin
 Flight::route('GET /reviews', function(){
     $data = Flight::ratingService()->get_all_with_game_and_user_info();
-    Flight::json($data);
+    Flight::json($data, 200);
 });
 
 
