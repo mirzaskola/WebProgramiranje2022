@@ -198,7 +198,7 @@ Flight::route('DELETE /deletereview/@id', function($id){
 *     )),
 *     @OA\Response(
 *         response=200,
-*         description="Offer has been added to the database"
+*         description="Review has been added to the database"
 *     ),
 *     @OA\Response(
 *         response=500,
