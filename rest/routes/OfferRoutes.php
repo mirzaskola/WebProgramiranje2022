@@ -57,7 +57,7 @@ Flight::route('GET /offers/@id', function($id){
 *     )),
 *     @OA\Response(
 *         response=200,
-*         description="Review has been updated"
+*         description="Offer has been updated"
 *     ),
 *     @OA\Response(
 *         response=500,
