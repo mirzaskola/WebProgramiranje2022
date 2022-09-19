@@ -11,19 +11,16 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 require_once __DIR__.'/services/UserService.class.php';
 require_once __DIR__.'/services/GameService.class.php';
-require_once __DIR__.'/services/CommentService.class.php';
 require_once __DIR__.'/services/OfferService.class.php';
 require_once __DIR__.'/services/RatingService.class.php';
 require_once __DIR__.'/services/CategoryService.class.php';
-require_once __DIR__.'/dao/UserDao.class.php';
 
 
-Flight::register('userDao', 'UserDao');
+
 Flight::register('userService', 'UserService');
 Flight::register('gameService', 'GameService');
 Flight::register('ratingService', 'RatingService');
 Flight::register('categoryService', 'CategoryService');
-Flight::register('commentService', 'CommentService');
 Flight::register('offerService', 'OfferService');
 
 
@@ -59,7 +56,6 @@ Flight::route('/*', function(){
 
 require_once __DIR__.'/routes/UserRoutes.php';
 require_once __DIR__.'/routes/GameRoutes.php';
-require_once __DIR__.'/routes/CommentRoutes.php';
 require_once __DIR__.'/routes/OfferRoutes.php';
 require_once __DIR__.'/routes/RatingRoutes.php';
 require_once __DIR__.'/routes/CategoryRoutes.php';

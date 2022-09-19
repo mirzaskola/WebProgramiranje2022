@@ -174,47 +174,47 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="reviewGameForm" method="post">
+                <form class="align-items-center" id="reviewGameForm" method="post">
                     <div class="mb-3" id="gameTitle"></div>
 
                     <div class="input-group mb-3">
                       <input name="game_id" id="game_id" type="hidden">
                     </div>
                     
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 col-auto">
                       <label for="gameplayRange" class="form-label"><img src="img/001-sad.png" alt="">Gameplay</label>
                       <input name="gameplay_rating"  type="range" class="form-range" min="0" max="100" step="10" id="gameplayRange">
                     </div>
 
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 col-auto">
                       <label for="performanceRange" class="form-label"><img src="img/002-growth.png" alt=""> Performance</label>
                       <input name="performance_rating"  type="range" class="form-range" min="0" max="100" step="10" id="performanceRange">
                     </div>
                     
-                    <div class="d-flex mb-3">
+                    <div class="input-group mb-3 col-auto">
                         <label for="graphicsRange" class="form-label"><img src="img/003-graphic-design.png" alt=""> Graphics</label>
                         <input name="graphics_rating"  type="range" class="form-range" min="0" max="100" step="10" id="graphicsRange">
                     </div>
-                    <div class="d-flex mb-3">
+                    <div class="input-group mb-3 col-auto">
                         <label for="audioRange" class="form-label"><img src="img/004-headphone.png" alt=""> Audio</label>
                         <input name="audio_rating"  type="range" class="form-range" min="0" max="100" step="10" id="audioRange">
                     </div>
-                    <div class="d-flex mb-3">
+                    <div class="input-group mb-3 col-auto">
                         <label for="satisfactionRange" class="form-label"><img src="img/005-satisfaction.png" alt=""> Satisfaction</label>
                         <input name="satisfaction_rating"  type="range" class="form-range" min="0" max="100" step="10" id="satisfactionRange">
                     </div>
-                    <div class="d-flex mb-3">
-                        <label for="reviewComment" class="form-label">Comments (Optional)</label>
-                        <textarea name="comment"  class="form-control" aria-label="Comments (Optional)" id="reviewComment"></textarea>
+                    <div class="input-group mb-3 col-auto">
+                        <textarea name="comment"  class="form-control" aria-label="Comments (Optional)" placeholder="Leave a comment here" id="reviewComment"></textarea>
                       </div>
-                    <button class="btn btn-primary" data-bs-target="#ModalGameDetails" data-bs-toggle="modal" type="submit">Submit</button>
+                    <div class="modal-footer d-flex justify-content-center">
+                      <button class="btn btn-primary save-changes-button" data-bs-target="#ModalGameDetails" data-bs-toggle="modal" type="submit">Leave review</button>
+                    </div>  
                 </form>
             </div>
           </div>
         </div>
       </div>
       <!--ModalReview end-->
-
     <script>
       GameService.init();
       GameService.get_highest_rated();

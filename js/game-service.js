@@ -150,7 +150,7 @@ var GameService = {
             success: function (data) {
                 $("#game_title").html("");
                 $("#game_title").html(`
-                <p class=" modal-title fs-4"> Details about ` + data.name + ` </p>
+                <h4 class=" modal-title fs-4"> Details about ` + data.name + ` </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               `);
 
@@ -273,6 +273,18 @@ var GameService = {
             }
         });
     },
+    parse_date: function(date){
+        var year = date.substring(2, 4);
+        var month = date.substring(5, 7);
+        var day = date.substring(8, 10);
+        var hour = date.substring(11, 13);
+        var minute = date.substring(14, 16);
+        // 0-4 5-7 8-10 12-14 16-18
+        // 2022-09-13 22:00:39
+        let datum = `${day}/${month}/${year}` ;
+        let time = `${hour}:${minute}`;
+        return `${datum} ${time}`;
+    },
     leave_review: function (review) {
         review.created = ``;
         let currentDate = new Date();
@@ -298,6 +310,7 @@ var GameService = {
                 // window.location.reload();
                 GameService.get_highest_rated();
                 GameService.get_all_games_client();
+                document.getElementById("reviewGameForm").reset()
             }
         });
     },
@@ -319,7 +332,7 @@ var GameService = {
                             <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
                     
                             <p class="pb-3 mb-0 small lh-sm border-bottom">
-                                <span class="d-block"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100 <span><i>Posted on: `+ data[i].created +`</i></span></span>
+                                <span class="d-block"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100 <span><i>Posted on: `+ GameService.parse_date(data[i].created) +`</i></span></span>
                                 
                                 `+ data[i].comment +`
                             </p>
@@ -346,7 +359,7 @@ var GameService = {
                     html = ``;
                     html += `<h2 class="text-center">No reviews for this title</h2>`;
                 }
-                for (let i = 0; i < data.length; i++) {
+                for (let i = 0; i < data.length; i++) {    
                     html += `
                         <!-- single review start -->
                         <tr>
@@ -355,7 +368,7 @@ var GameService = {
                                 <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
                         
                                 <p class="pb-3 mb-0 small lh-sm border-bottom">
-                                    <span class="d-block text-truncate"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100 <span><i>Posted on: `+ data[i].created +` </i></span></span>
+                                    <span class="d-block text-truncate"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100 <span><i>Posted on: `+ GameService.parse_date(data[i].created) +` </i></span></span>
                                     
                                     `+ data[i].comment +`
                                 </p>
@@ -612,7 +625,7 @@ var GameService = {
                                 <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
                         
                                 <p class="pb-3 mb-0 small lh-sm border-bottom">
-                                    <span class="d-block text-truncate"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100 <span><i>Posted on: `+ data[i].created +` </i></span></span>
+                                    <span class="d-block text-truncate"><strong class="text-gray-dark">@`+ data[i].username +`</strong> `+ parseInt(data[i].total_rating_by_post) +`/100 <span><i>Posted on: `+ GameService.parse_date(data[i].created)+` </i></span></span>
                                     
                                     `+ data[i].comment +`
                                 </p>
@@ -622,7 +635,7 @@ var GameService = {
                             <td class="text-start">
                             
                                             
-                             <button class="btn btn-outline-danger btn-sm delete-review-button" onclick="GameService.delete_review_for_my_profile(`+ data[i].review_id + `)">
+                             <button class="btn btn-outline-danger btn-sm delete-review-button" onclick="GameService.delete_review_admin(`+ data[i].review_id + `)">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                  </svg>
@@ -637,7 +650,21 @@ var GameService = {
                 $("#all-reviews").html(html);
             }
         });
-    },    
+    },   
+    delete_review_admin: function (id) {
+        $(".delete-review-button").attr('disabled', true);
+        $.ajax({
+            url: 'rest/deletereview/' + id,
+            type: 'DELETE',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function () {
+                $(".delete-review-button").attr('disabled', false);
+                GameService.get_all_reviews_admin();
+            }
+        });
+    }, 
     get_recent_user_activities: function(){
         $.ajax({
             url: 'rest/recentactivities',

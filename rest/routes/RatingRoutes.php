@@ -155,6 +155,27 @@ Flight::route('DELETE /deletemojirivjui/@id', function($id){
 });
 
 
+/**
+* @OA\Delete(
+*     path="/deletereview/{id}", security={{"ApiKeyAuth": {}}},
+*     description="Delete review from admin panel",
+*     tags={"reviews"},
+*     summary="Delete review from admin panel.", 
+*     @OA\Parameter(in="path", name="id", example=40, description="Review ID"),
+*     @OA\Response(
+*         response=200,
+*         description="Review deleted successfully"
+*     ),
+* )
+*/
+
+// delete review from admin panel
+Flight::route('DELETE /deletereview/@id', function($id){
+    Flight::ratingService()->delete($id);
+    Flight::json(["message" => "deleted"]);
+});
+
+
 
 /**
 * @OA\Post(

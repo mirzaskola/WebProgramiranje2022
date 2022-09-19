@@ -86,6 +86,35 @@ var UserService = {
         }
       });
     },
+    check_admin: function(){
+      $.ajax({
+        url: 'rest/checkuser',
+        type: 'GET',
+        beforeSend: function(xhr){
+          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
+        success: function(result) {
+          if(result == "admin"){
+            GameService.init();
+            GameService.get_all_games_admin();
+            GameService.get_all_reviews_admin();
+            GameService.get_recent_user_activities();
+            OfferService.init();
+            OfferService.get_all_offers_admin();
+            UserService.get_all_users_admin();
+            UserService.init();
+            CategoryService.get_all_categories_admin();
+            CategoryService.init();
+          }
+          else{
+            window.location.replace("index.html");
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          window.location.replace("login.html");
+        }
+      });
+    },
     check_user_role: function(current_url){
       $.ajax({
         url: 'rest/checkuser',

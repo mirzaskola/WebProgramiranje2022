@@ -47,7 +47,7 @@
         </style>
         
     </head>
-
+    
     <body class="bg-light">
         <!-- Navbar start-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navbar">
@@ -86,7 +86,7 @@
                     <ul class="dropdown-menu dropdown-menu-lg-end" style="font-size: 12px;">
                       <li><a class="dropdown-item" href="index.html">Back to homepage</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" onclick="UserService.logout()">Log out</a></li>
+                      <li><a class="dropdown-item" role="button" onclick="UserService.logout()">Log out</a></li>
                     </ul>
                 </div>
               </div>
@@ -97,10 +97,10 @@
         <main>
           <!-- Add button group start-->
           <div class="d-flex justify-content-center mt-5">               
-            <button class="btn btn-outline-primary btn-lg me-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewGameModal">  Add new game </button>
-            <button class="btn btn-outline-primary btn-lg ms-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewOfferModal"> Add new offer </button>
-            <button class="btn btn-outline-primary btn-lg ms-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewCategoryModal"> Add new category </button>                                
-            <button class="btn btn-outline-primary btn-lg ms-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewUserModal"> Add new user </button>                                
+            <button class="btn btn-outline-primary btn-lg me-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewGameModal">  Add game </button>
+            <button class="btn btn-outline-primary btn-lg ms-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewOfferModal"> Add offer </button>
+            <button class="btn btn-outline-primary btn-lg ms-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewCategoryModal"> Add category </button>                                
+            <button class="btn btn-outline-primary btn-lg ms-1 admin-add-button" data-bs-toggle="modal" data-bs-target="#addNewUserModal"> Add user </button>                                
           </div>
           <!-- Add button group end-->
 
@@ -226,7 +226,7 @@
         <div class="modal-content" style="color: black;">
           <form id="addGameForm">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Add new game</h5>
+              <h4 class="modal-title" id="exampleModalLabel">Add game</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -261,7 +261,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Add new game</button>
+              <button type="submit" class="btn btn-primary">Add game</button>
             </div>
           </form>
         </div>
@@ -274,7 +274,7 @@
         <div class="modal-content" style="color: black;">
           <form id="editGameForm">         
             <div class="modal-header">
-              <p class="modal-title fs-4">Edit game details</p>
+              <h4 class="modal-title fs-4">Edit game details</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -323,7 +323,7 @@
         <div class="modal-content" style="color: black;">
           <form id="addOfferForm">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Add new offer</h5>
+              <h4 class="modal-title" id="exampleModalLabel">Add new offer</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -352,7 +352,7 @@
 
                 <div class="input-group mb-3">
                   <span class="input-group-text w-25" id="active-addon">Active</span>
-                  <input name="is_active" type="text" class="form-control required" placeholder="Active" aria-describedby="active-addon">
+                  <input name="is_active" type="number" class="form-control required" min="0" max="1" value="0" placeholder="Active" aria-describedby="active-addon">
                 </div>
               </div>
             </div>
@@ -371,7 +371,7 @@
         <div class="modal-content" style="color: black;">
           <form id="editOfferForm">         
             <div class="modal-header">
-              <p class="modal-title fs-4">Edit offer details</p>
+              <h4 class="modal-title fs-4">Edit offer details</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -400,7 +400,7 @@
 
                 <div class="input-group mb-3">
                   <span class="input-group-text w-25" id="active-addon">Active</span>
-                  <input name="is_active" type="text" class="form-control required" placeholder="Active" aria-describedby="active-addon">
+                  <input name="is_active" type="number" class="form-control required" min="0" max="1" placeholder="Active" aria-describedby="active-addon">
                 </div>
 
               </div>
@@ -420,7 +420,7 @@
         <div class="modal-content" style="color: black;">
           <form id="addUserForm">         
             <div class="modal-header">
-              <p class="modal-title fs-4">Add user</p>
+              <h4 class="modal-title fs-4">Add user</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -463,7 +463,7 @@
         <div class="modal-content" style="color: black;">
           <form id="editUserForm">         
             <div class="modal-header">
-              <p class="modal-title fs-4">Edit user</p>
+              <h4 class="modal-title fs-4">Edit user</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -507,7 +507,7 @@
         <div class="modal-content" style="color: black;">
           <form id="addCategoryForm">         
             <div class="modal-header">
-              <p class="modal-title fs-4">Add category</p>
+              <h4 class="modal-title fs-4">Add category</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -535,7 +535,7 @@
         <div class="modal-content" style="color: black;">
           <form id="editCategoryForm">         
             <div class="modal-header">
-              <p class="modal-title fs-4">Add category</p>
+              <h4 class="modal-title fs-4">Edit category</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -622,27 +622,8 @@
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         } 
     </script>
-    
-    <!-- <script>
-      $('#editOfferForm').validate({
-        submitHandler: function(form) {
-          var offer = Object.fromEntries((new FormData(form)).entries());
-
-          OfferService.update(offer);
-        }
-      });
-    </script>   -->
     <script>
-        GameService.init();
-        GameService.get_all_games_admin();
-        GameService.get_all_reviews_admin();
-        GameService.get_recent_user_activities();
-        OfferService.init();
-        OfferService.get_all_offers_admin();
-        UserService.get_all_users_admin();
-        UserService.init();
-        CategoryService.get_all_categories_admin();
-        CategoryService.init();
+      UserService.check_admin();
     </script>
 
 </html>

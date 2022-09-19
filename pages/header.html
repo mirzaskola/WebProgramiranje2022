@@ -33,7 +33,7 @@
                 </svg>
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end" style="font-size: 12px;">
-                <li><a class="dropdown-item" onclick="UserService.check_user_role('profile');">View your profile</a> </li>
+                <li><a class="dropdown-item" role="button" onclick="UserService.check_user_role('profile');">View your profile</a> </li>
                 <li><a class="dropdown-item" id="adminPanelItem" role="button" onclick="UserService.check_user_role('admin');">Admin panel</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="login.html" role="button" onclick="UserService.logout();">Log out</a></li>
