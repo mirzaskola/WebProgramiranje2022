@@ -29,6 +29,18 @@ class UserService extends BaseService{
             return (['message' => "User doesn't exist", 'code' => 404]);
         }
     }
+    public function signup($sign_up_data){
+        $user = $this->dao->get_user_by_email($sign_up_data['email']);
+        if(isset($user['id'])){
+            return (['message' => "User already exists", 'code' => 409]);
+        }
+        else{
+            $sign_up_data['password'] = md5($sign_up_data['password']);
+            $sign_up_data['user_role'] = 0;
+            $this->dao->add($sign_up_data);
+            return (['message' => "Signed up successfully", 'code' => 200]);
+        }
+    }
     public function check_user_role($user){
         $user_from_db = $this->dao->get_user_by_email($user['email']);
         if (isset($user_from_db['id'])){

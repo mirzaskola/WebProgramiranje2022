@@ -286,6 +286,10 @@ Flight::route('POST /login', function(){
 *         response=200,
 *         description="Successfully added user to database."
 *     ),
+*     @OA\Response(
+*         response=409,
+*         description="User already exists."
+*     ),
 *     
 * )
 */
@@ -293,10 +297,10 @@ Flight::route('POST /login', function(){
 // Register user
 Flight::route('POST /signup', function(){
     $sign_up_data = Flight::request()->data->getData();
-    $sign_up_data['password'] = md5($sign_up_data['password']);
-    $sign_up_data['user_role'] = 0;
-    Flight::userService()->add($sign_up_data);
-    Flight::json(["message" => "Signed up successfully"], 200);
+    // $sign_up_data['password'] = md5($sign_up_data['password']);
+    // $sign_up_data['user_role'] = 0;
+    $response = Flight::userService()->signup($sign_up_data);
+    Flight::json(["message" => $response['message']], $response['code']);
 });
 
 /**
